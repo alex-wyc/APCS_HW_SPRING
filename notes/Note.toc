@@ -1,0 +1,4 @@
+\contentsline {section}{\numberline {1}2015-02-05}{3}
+\contentsline {subsection}{\numberline {1.1}Do Now}{3}
+\contentsline {subsection}{\numberline {1.2}Stack and ROP}{3}
+\contentsline {subsection}{\numberline {1.3}Recursion}{3}

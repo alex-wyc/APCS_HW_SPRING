@@ -1,0 +1,93 @@
+\documentclass [12 pt, twoside] {article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{setspace}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codeblue}{rgb}{0,0,0.6}
+\definecolor{backcolor}{rgb}{0.95,0.95,0.95}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor = \color{backcolor},
+	commentstyle = \color{codeblue},
+	keywordstyle = \color{codegreen},
+	numberstyle = \color{codegray},
+	stringstyle = \color{magenta},
+	basicstyle = \footnotesize,
+	breakatwhitespace = false,
+	breaklines = true,
+	captionpos = b,
+	keepspaces = true,
+	numbers = left,
+	numbersep = 5pt,
+	showspaces = false,
+	showstringspaces = false,
+	showtabs = false,
+	tabsize = 4
+}
+
+\lstset{style = mystyle}
+
+\begin{document}
+
+\title{APCS Notes}
+\author{Yicheng Wang}
+\date{2014-2015}
+
+\maketitle
+\newpage
+\setcounter{tocdepth}{3}
+\tableofcontents
+\newpage
+
+\section{2015-02-05}
+\subsection{Do Now}
+Figure out what the following code does.
+
+\begin{lstlisting} [language=Java]
+public void printme(int n) {
+	if (N > 0) {
+		printme(n - 1);
+		System.out.println(n);
+	}
+}
+\end{lstlisting}
+
+It should print out an increasing sequence of numbers
+from 1-N.
+
+\subsection{Stack and ROP}
+The stack on top is the current function, and each layer beneath that
+is the function that called the current function.
+
+\subsection{Recursion}
+
+
+
+Simple recursive problem: FACTORIAL
+
+
+Hallmarks of a recursive solutioin:
+\begin{itemize}
+	\item Base Case: thing that stops the program, simple case you know the answer of. In the case of factorials, factorial(0) = 1
+	\item Reduction Case: You need to alternate the variable in some sort of way, for example, we should do n * factorial(n - 1)
+	\item Recursion: function A need to eventually call A
+\end{itemize}
+
+
+Final code:
+\begin{lstlisting}[language=Java]
+public int factorial(n) {
+	if (n == 0) {
+		return 1;
+	}
+	else {
+		return n * factorial(n - 1);
+	}
+}
+\end{lstlisting}
+
+\end{document}
