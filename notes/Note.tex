@@ -82,12 +82,60 @@ Final code:
 \begin{lstlisting}[language=Java]
 public int factorial(n) {
 	if (n == 0) {
-		return 1;
+		return 1; // Base Case
 	}
 	else {
-		return n * factorial(n - 1);
+		return n * factorial(n - 1); // Reduction Step
 	}
 }
 \end{lstlisting}
 
+\section{2015-02-06}
+
+\subsection{Traditional Recursion Examples}
+\subsubsection{Fibonacci Numbers}
+1, 1, 2, 3, 5, 8, 13 ...
+
+
+Base Case: if n < 2, return 1
+
+
+Reduction Step: fib(n) = fib(n - 1) + fib(n - 2)
+
+
+Example Code:
+\begin{lstlisting}[style=Java]
+public int fib(int n) {
+	if (n < 2) {
+		return 1;
+	}
+
+	else {
+		return fib(n - 1) + fib(n - 2);
+	}
+}
+\end{lstlisting}
+
+\subsubsection{List/String Manipulation}
+
+
+Example, finding the length of a substring.
+
+
+Base case: "" has length of 0
+
+
+Reduction Step: 1 + "cdr" of the string, i.e. s.substring(1);
+
+
+Example Code:
+\begin{lstlisting}[style=Java]
+public int lenStr(String s) {
+	if (s.equals("")) {
+		return 0;
+	}
+	else {
+		return 1 + lenStr(s.substring(1));
+	}
+}
 \end{document}
