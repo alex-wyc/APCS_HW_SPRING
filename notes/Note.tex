@@ -138,4 +138,31 @@ public int lenStr(String s) {
 		return 1 + lenStr(s.substring(1));
 	}
 }
+
+
+\section{2015-02-09}
+\subsection{Getting out of a Maze}
+\begin{enumerate}
+	\item Maze vs. Laybrith: Laybrith may not have choices, mazes have choices.
+	\item Strategies in solving the maze:
+		\begin{itemize}
+			\item Doesn't work due to loops
+		\end{itemize}
+	\item Greek Way of Solving Mazes:
+		\begin{itemize}
+			\item Invented by Odysseus, bring a thread, use process of elimination to loop through all possible intersection.
+			\item Works really well.
+		\end{itemize}
+\end{enumerate}
+
+
+Maze solving in java
+\begin{enumerate}
+	\item This is clearly a recursive solution.
+	\item Using a recursive solution we can easily trace back the stack to find the previous intersection
+	\item We represent our map as a char array of paths ('#')
+	\item Base case: location is a wall OR location of exit
+	\item Reduction step: call solve at a different (x,y) location, if it's a dead end, it'll be peeled off the stack due to the "return"
+	\item We will try to solve the maze systematically, x+/-1, y+/-1.
+\end{enumerate}
 \end{document}
