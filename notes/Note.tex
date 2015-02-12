@@ -104,7 +104,7 @@ Reduction Step: fib(n) = fib(n - 1) + fib(n - 2)
 
 
 Example Code:
-\begin{lstlisting}[style=Java]
+\begin{lstlisting}[language=Java]
 public int fib(int n) {
 	if (n < 2) {
 		return 1;
@@ -129,7 +129,7 @@ Reduction Step: 1 + "cdr" of the string, i.e. s.substring(1);
 
 
 Example Code:
-\begin{lstlisting}[style=Java]
+\begin{lstlisting}[language=Java]
 public int lenStr(String s) {
 	if (s.equals("")) {
 		return 0;
@@ -138,7 +138,7 @@ public int lenStr(String s) {
 		return 1 + lenStr(s.substring(1));
 	}
 }
-
+\end{lstlisting}
 
 \section{2015-02-09}
 \subsection{Getting out of a Maze}
@@ -160,9 +160,38 @@ Maze solving in java
 \begin{enumerate}
 	\item This is clearly a recursive solution.
 	\item Using a recursive solution we can easily trace back the stack to find the previous intersection
-	\item We represent our map as a char array of paths ('#')
+	\item We represent our map as a char array of paths ('\#')
 	\item Base case: location is a wall OR location of exit
 	\item Reduction step: call solve at a different (x,y) location, if it's a dead end, it'll be peeled off the stack due to the "return"
 	\item We will try to solve the maze systematically, x+/-1, y+/-1.
 \end{enumerate}
+
+\section{2015-02-11}
+\subsection{Blind Search}
+
+Trying all possibilities until we find our solutions. Also called exhaustive search, linear search,
+recursive search, search with backtracking.
+
+
+The maze algorithm we wrote is sometimes known as a depth first search. It's because
+you say in one path for as long as possible. Advantage is if the solution is deep, this works
+pretty well. However, if the solution is closer, breath first search goes n steps in all
+possible directions.
+
+\subsection{State Space Search}
+
+Search algorithm to solve a problem, searching for a "state space."
+
+Idea is if you have a problem, you can describe said problem as a "state."
+
+State is a configuration of the world, such as turtle in netLogo.
+
+The world is made up of many states, and one can transition from one state to the next.
+
+\textbf{State Space Search:} The series of states one has to go through to get to the desirable final state. (like exit in the maze thing)
+
+\subsection{Graph Theory}
+
+Graphs are collections of edges and nodes. Nodes represent the states, edges marks the transition between one node to the next.
+
 \end{document}
