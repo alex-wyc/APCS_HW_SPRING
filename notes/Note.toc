@@ -12,3 +12,7 @@
 \contentsline {subsection}{\numberline {4.1}Blind Search}{5}
 \contentsline {subsection}{\numberline {4.2}State Space Search}{5}
 \contentsline {subsection}{\numberline {4.3}Graph Theory}{5}
+\contentsline {section}{\numberline {5}2015-02-12}{5}
+\contentsline {subsection}{\numberline {5.1}Space State Search}{5}
+\contentsline {subsection}{\numberline {5.2}Implicit Data Structure}{6}
+\contentsline {subsection}{\numberline {5.3}PROJECT}{6}
