@@ -240,4 +240,40 @@ each square once without repetition. (Start with $5 \times 5$);
 
 
 A way to place N mutually non-attacking queens on a $N \times N$ chessboard.
+
+\section{2015-02-13}
+
+Other problem, third variation, one can also do the 15 puzzle.
+
+\subsection{System.out.printf}
+When one is doing a knight's tour, the print output may be distorted if
+one moves from single digit to double digit. We can leave a placeholder
+in the format string, such as \%s, \%d, etc.
+
+
+Example code:
+\begin{lstlisting}[language=java]
+...
+System.out.printf("%s, helloWorld\n %s\n", "title", "more stuff!");
+...
+
+OUTPUT:
+
+title, helloWorld
+more stuff!
+\end{lstlisting}
+
+However, printf can take multiple types and it is possible to save spaces for
+formatters. Like the following:
+
+\begin{lstlisting}
+...
+System.out.printf("%3d\n%3d", 1, 123);
+...
+
+OUTPUT:
+
+  1
+123
+\end{lstlisting}
 \end{document}
