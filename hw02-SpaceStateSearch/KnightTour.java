@@ -64,6 +64,37 @@ public class KnightTour {
 		return s;
 	}
 
+/*	// For heuresic purposes...
+	private int legalMoveCounter(int x, int y) {
+		counter = 0;
+		if (board[x + 4][y + 3].equals("0"))
+			counter++;
+
+		if (board[x + 4][y + 1].equals("0"))
+			counter++;
+
+		if (board[x + 3][y + 4].equals("0"))
+			counter++;
+
+		if (board[x + 3][y + 0].equals("0"))
+			counter++;
+
+		if (board[x + 1][y + 4].equals("0"))
+			counter++;
+
+		if (board[x + 1][y + 0].equals("0"))
+			counter++;
+
+		if (board[x + 0][y + 3].equals("0"))
+			counter++;
+
+		if (board[x + 0][y + 1].equals("0"))
+			counter++;
+
+		return counter;
+	}
+*/
+
 	private void solveH(int x, int y, int counter) {
 /*
 		try {
@@ -87,6 +118,29 @@ public class KnightTour {
 
 //		System.out.println(this);
 
+/*
+		// Warnsdorff's rule!!
+
+		int candidate = 0;
+		int legalMoves = legalMoveCounter(x + 2, y + 1);
+
+		// #FIXME There must be an easier way
+		if (legalMoveCounter(x + 2, y - 1) < legalMoveCounter)
+			candidate = 1;
+		if (legalMoveCounter(x + 1, y + 2) < legalMoveCounter) 
+			candidate = 2;
+		if (legalMoveCounter(x + 1, y - 2) < legalMoveCounter)
+			candidate = 3;
+		if (legalMoveCounter(x - 1, y + 2) < legalMoveCounter)
+			candidate = 4;
+		if (legalMoveCounter(x - 1, y - 2) < legalMoveCounter)
+			candidate = 5;
+		if (legalMoveCounter(x - 2, y + 1) < legalMoveCounter)
+			candidate = 6;
+		if (legalMoveCounter(x - 2, y - 1) < legalMoveCounter)
+			candidate = 7;
+*/
+		
 		solveH(x + 2, y + 1, counter + 1);
 		solveH(x + 2, y - 1, counter + 1);
 		solveH(x + 1, y + 2, counter + 1);
