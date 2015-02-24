@@ -81,6 +81,10 @@ public class Lake {
 		return sum * 12 * 12 * 6 * 6;
 	}
 
-	public static void Main(String[]		L
+	public static void Main(String[] args) {
+		Lake lk = new Lake(args[0]);
+		lk.performInstructions();
+		int ans = lk.calculateLake();
+		System.out.println(ans);
 	}
 }
