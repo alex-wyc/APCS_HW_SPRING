@@ -276,4 +276,51 @@ OUTPUT:
   1
 123
 \end{lstlisting}
+
+\section{2015-02-25}
+
+Iteninary:
+\begin{itemize}
+	\item Tomorrow - Knight's Tour
+	\item Tuesday - USACO
+\end{itemize}
+
+Today, we're going back to sorting.
+
+\section{Merge Sort}
+
+So far, we've covered 3 algorithms: selection sort, insertion sort, and bubble sort.
+They are all linear algorithms. Selection sort selects the ith index and puts the ith
+smallest/largest elements there, whereas insertion sort inserts the ith smallest/largest
+element so far into the ith index of the list.
+
+HOWEVER, we're lazy and need to do this the 6 years old way. If we're sorting a deck of
+unsorted cards, we'll split the deck in half and give it to more people, so on, and so
+on. This continues until everyone has 1 card at hand. The process then goes backwards
+and the people merges the sorted lists passed on to him/her. This is known as a merge sort,
+it is a \textbf{divide and conquer algorithm.}
+
+Sample code:
+\begin{lstlisting}[language=java]
+...
+	public ArrayList<Integers> sort(ArrayList<Integers> data) {
+		// Base Case
+		if (data.size() == 1) {
+			return data;
+		}
+
+		else {
+			int[] A = Arrays.copyOfRange(data, 0, data.length / 2);
+			int[] B = Arrays.copyOfRange(data, data.length / 2, data.length);
+			int[] AS = sort(A);
+			int[] BS = sort(B);
+			return merge(AS, BS);
+		}
+	}
+
+	public int[] merge(int[] AS, int[] BS) {
+
+	}
+...
+\end{lstlisting}
 \end{document}
