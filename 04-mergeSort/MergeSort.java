@@ -1,15 +1,17 @@
 import java.util.*;
 import java.io.*;
 
-public class mergeSort {
+public class MergeSort {
 	
 	public static ArrayList<Integer> mergeSort(ArrayList<Integer> data) {
 		if (data.size() == 1) {
+			System.out.println("Result: " + data.toString());
 			return data;
 		}
 
 		else {
-			ArrayList<Integer> A, B = new ArrayList<Integer>();
+			ArrayList<Integer> A = new ArrayList<Integer>();
+			ArrayList<Integer> B = new ArrayList<Integer>();
 
 			for (int i = 0 ; i < data.size() / 2 ; i++) {
 				A.add(data.get(i));
@@ -18,13 +20,16 @@ public class mergeSort {
 				B.add(data.get(i));
 			}
 
-			mergeSort(A);
-			mergeSort(B);
-			return merge(A, B);
+			ArrayList<Integer> AS = mergeSort(A);
+			ArrayList<Integer> BS = mergeSort(B);
+			//System.out.println("A: " + AS.toString());
+			//System.out.println("B: " + BS.toString());
+			//System.out.println("Result: " + merge(AS,BS).toString());
+			return merge(AS, BS);
 		}
 	}
 
-	private ArrayList<Integer> merge(ArrayList<Integer> A, ArrayList<Integer> B) {
+	public static ArrayList<Integer> merge(ArrayList<Integer> A, ArrayList<Integer> B) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
 
 		while(A.size() != 0 && B.size() != 0) {
