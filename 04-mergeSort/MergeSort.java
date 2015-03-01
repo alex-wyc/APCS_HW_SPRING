@@ -5,7 +5,6 @@ public class MergeSort {
 	
 	public static ArrayList<Integer> mergeSort(ArrayList<Integer> data) {
 		if (data.size() == 1) {
-			System.out.println("Result: " + data.toString());
 			return data;
 		}
 
@@ -22,9 +21,6 @@ public class MergeSort {
 
 			ArrayList<Integer> AS = mergeSort(A);
 			ArrayList<Integer> BS = mergeSort(B);
-			//System.out.println("A: " + AS.toString());
-			//System.out.println("B: " + BS.toString());
-			//System.out.println("Result: " + merge(AS,BS).toString());
 			return merge(AS, BS);
 		}
 	}
@@ -46,4 +42,38 @@ public class MergeSort {
 		
 		return result;
 	}
+
+	public static int[] mergeSort(int[] data) {
+        if (data.length == 1) {
+            return data;
+        }
+
+        else {
+            int[] A = Arrays.copyOfRange(data, 0, data.length / 2);
+            int[] B = Arrays.copyOfRange(data, data.length / 2, data.length);
+
+            int[] AS = mergeSort(A);
+            int[] BS = mergeSort(B);
+            return merge(AS, BS);
+        }
+    }
+
+    public static int[] merge(int[] A, int[] B) {
+        int[] result = new int[A.length + b.length];
+        int position = 0;
+        int APos = 0;
+        int BPos = 0;
+        while (position < result.length) {
+            if (A[APos] < B[BPos]) {
+                result[position] = A[APos];
+                APos++;
+            }
+            else {
+                result[position] = B[0];
+                BPos++;
+            }
+            position++;
+        }
+        return result
+    }
 }
