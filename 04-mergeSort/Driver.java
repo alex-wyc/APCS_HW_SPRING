@@ -19,5 +19,11 @@ public class Driver {
 		
 		System.out.println(sorted.toString());
 		System.out.println(timeE - timeI);
+
+		int[] toBeSorted = new int[Integer.parseInt(args[0])];
+        Random randgen = new Random();
+        for (int i = 0 ; i < Integer.parseInt(args[0]) ; i++) {
+            toBeSorted[i] = Random.nextInt(Integer.parseInt(args[1]));
+        }
 	}
 }
