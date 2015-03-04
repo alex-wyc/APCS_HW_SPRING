@@ -54,26 +54,38 @@ public class MergeSort {
 
             int[] AS = mergeSort(A);
             int[] BS = mergeSort(B);
+            //System.out.println(Arrays.toString(AS));
+            //System.out.println(Arrays.toString(BS));
+            //System.out.println("\t" + Arrays.toString(merge(AS, BS)));
             return merge(AS, BS);
         }
     }
 
     public static int[] merge(int[] A, int[] B) {
-        int[] result = new int[A.length + b.length];
+        int[] result = new int[A.length + B.length];
         int position = 0;
         int APos = 0;
         int BPos = 0;
-        while (position < result.length) {
+        while (APos < A.length && BPos < B.length) {
             if (A[APos] < B[BPos]) {
                 result[position] = A[APos];
                 APos++;
             }
             else {
-                result[position] = B[0];
+                result[position] = B[BPos];
                 BPos++;
             }
             position++;
         }
-        return result
+
+        for (int i = APos ; i < A.length ; i++) {
+            result[position] = A[i];
+            position++;
+        }
+        for (int i = BPos ; i < B.length ; i++) {
+            result[position] = B[i];
+            position++;
+        }
+        return result;
     }
 }

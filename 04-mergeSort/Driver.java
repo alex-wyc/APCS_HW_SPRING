@@ -4,7 +4,7 @@ import java.io.*;
 public class Driver {
 
 	public static void main(String[] args) {
-		
+		/*
 		ArrayList<Integer> toBeSorted = new ArrayList<Integer>();
 		Random randgen = new Random();
 		for (int i = 0 ; i < Integer.parseInt(args[0]) ; i++) {
@@ -19,11 +19,20 @@ public class Driver {
 		
 		System.out.println(sorted.toString());
 		System.out.println(timeE - timeI);
+		*/
 
 		int[] toBeSorted = new int[Integer.parseInt(args[0])];
         Random randgen = new Random();
         for (int i = 0 ; i < Integer.parseInt(args[0]) ; i++) {
-            toBeSorted[i] = Random.nextInt(Integer.parseInt(args[1]));
+            toBeSorted[i] = randgen.nextInt(Integer.parseInt(args[1]));
         }
+
+		System.out.println(Arrays.toString(toBeSorted));
+		
+		long timeI = System.currentTimeMillis();
+		int[] result = MergeSort.mergeSort(toBeSorted);
+		long timeE = System.currentTimeMillis();
+
+        System.out.println(Arrays.toString(result));
 	}
 }
