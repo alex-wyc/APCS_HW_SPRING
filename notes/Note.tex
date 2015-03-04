@@ -303,24 +303,76 @@ it is a \textbf{divide and conquer algorithm.}
 Sample code:
 \begin{lstlisting}[language=java]
 ...
-	public ArrayList<Integers> sort(ArrayList<Integers> data) {
-		// Base Case
-		if (data.size() == 1) {
-			return data;
-		}
+	public static int[] mergeSort(int[] data) {
+        if (data.length == 1) {
+            return data;
+        }
 
-		else {
-			int[] A = Arrays.copyOfRange(data, 0, data.length / 2);
-			int[] B = Arrays.copyOfRange(data, data.length / 2, data.length);
-			int[] AS = sort(A);
-			int[] BS = sort(B);
-			return merge(AS, BS);
-		}
-	}
+        else {
+            int[] A = Arrays.copyOfRange(data, 0, data.length / 2);
+            int[] B = Arrays.copyOfRange(data, data.length / 2, data.length);
 
-	public int[] merge(int[] AS, int[] BS) {
+            int[] AS = mergeSort(A);
+            int[] BS = mergeSort(B);
+            return merge(AS, BS);
+        }
+    }
 
-	}
+    public static int[] merge(int[] A, int[] B) {
+        int[] result = new int[A.length + B.length];
+        int position = 0;
+        int APos = 0;
+        int BPos = 0;
+        while (APos < A.length && BPos < B.length) {
+            if (A[APos] < B[BPos]) {
+                result[position] = A[APos];
+                APos++;
+            }
+            else {
+                result[position] = B[BPos];
+                BPos++;
+            }
+            position++;
+        }
+
+        for (int i = APos ; i < A.length ; i++) {
+            result[position] = A[i];
+            position++;
+        }
+        for (int i = BPos ; i < B.length ; i++) {
+            result[position] = B[i];
+            position++;
+        }
+        return result;
+    }
+
 ...
 \end{lstlisting}
+
+\section{2015-03-04}
+\subsection{On the Algorithm of the Merge Sort}
+In insertion and selection sorts, the average operation has a complexity of
+$n^2$. This is because the inner loop runs through the list ($n$ operations)
+and the outer loop instructs us to run through the inner loop $n$ times, hence
+the total operations is $n^2$.
+
+For merge sort, each step we split the list in half and sort the smaller part
+first. If we imagine this as a tree, we divide the list in half each time. So
+the vertical step takes $\log_2{n}$ steps. Then at each step, we copy the array
+once so there is also a $n$ component to the total complexity. Then, the sum
+of each level's merge is also going to be $n$ because merging takes the same
+amount of work as splitting. Therefore, the total complexity is:
+$$O(n) = n\log{n}$$
+
+Let's look at the different rate of growth of the two curves ($n^2$ and
+$n\log{n}$). Take, 1,000,000 as $n$, $n^2 = 1.0 \times 10^{12}$, but $n\log{n} = 6
+\times 10^{6}$
+
+\subsection{Big O Notation}
+A function $f(n)$ is said to be $O(g(n))$ if there exists some constant $k$
+such that $kg(n) > f(n)$ over the long term.
+
+Note that the Big O Notation is always and \textbf{Upper bound}, and is
+extracted from the worst-case scenario of the function. However, it is a very
+tight upper bound.
 \end{document}

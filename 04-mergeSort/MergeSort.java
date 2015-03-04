@@ -54,9 +54,6 @@ public class MergeSort {
 
             int[] AS = mergeSort(A);
             int[] BS = mergeSort(B);
-            //System.out.println(Arrays.toString(AS));
-            //System.out.println(Arrays.toString(BS));
-            //System.out.println("\t" + Arrays.toString(merge(AS, BS)));
             return merge(AS, BS);
         }
     }
