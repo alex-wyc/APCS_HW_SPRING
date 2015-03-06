@@ -375,4 +375,25 @@ such that $kg(n) > f(n)$ over the long term.
 Note that the Big O Notation is always and \textbf{Upper bound}, and is
 extracted from the worst-case scenario of the function. However, it is a very
 tight upper bound.
+
+\section{2015-03-05}
+We shall write an algorithm to find the $k^{th}$ smallest element.
+
+A few ways to do this:
+
+One, we can recursively delete the smallest data point, but this isn't very
+efficient. In fact, this is a $O(n^2)$ algorithm.
+
+The other, cheap (my) way is to first merge sort it and then just do a lookup
+for the element. This has the complexity of only $O(n\log{n})$.
+
+Note that for hard problems, it is very hard for complexity to go below
+$O(n\log{n})$. Therefore, merge sorting something is practically free,
+complexity-wise. Case in point: is it worthwhile to first sort an array and
+then use binary search with the merge sort or just use the linear search.
+
+However, there is a more efficient way of doing this.
+
+We can use a binary-search-like algorithm. 
+
 \end{document}
