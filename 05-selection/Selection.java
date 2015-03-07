@@ -2,31 +2,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Selection {
-    /* Failed attempt... Rearrangement is a lot easier in arrays.
-    public static select(int k, ArrayList<Integer> data) {
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        int pivot = data.get(0);
-        result.add(pivot);
-        for (int i = 1 ; i < data.size() ; i++) {
-            if (data.get(i) < pivot) {
-                result.add(data.get(i), 0);
-            }
-            else {
-                result.add(data.get(i));
-            }
-        }
-        
-        for (int i = 0 ; i < data.size() ; i++) {
-            if (result.get(i) == k) {
-                return select(k, )
-            }
-            if (result.get(i) == pivot) {
-                return select(k)
-            }
-        }
-
-    }
-    */
 
     public static int select(int k, int[] data) {
         int lastPos = data.length - 1;
@@ -56,6 +31,52 @@ public class Selection {
         }
     }
 
+    // FIXME -- Select with partition and altercation
+    // Also, for this one k is the position, not index
+
+    public static int select(int k, int[] A, int l, int h) {
+        // Base case:
+
+        if (l >= h) {
+            return A[k - 1];
+        }
+
+        int[] newArr = new int[A.length];
+        int pivotIndex = (l + h) / 2;
+        int pivot = A[pivotIndex];
+        int low = l, high = h;
+
+        for (int i = l ; i <= h ; i++) {
+            if (A[i] == pivot) {
+                continue;
+            }
+            if (A[i] > pivot) {
+                newArr[high--] = A[i];
+            }
+            else {
+                newArr[low++] = A[i];
+            }
+        }
+
+        pivotIndex = low;
+
+        while (low <= high) {
+            newArr[low++] = pivot; // Duplicates cannot hurt right?
+        }
+
+        if (newArr[k - 1] == pivot) {
+            return pivot;
+        }
+
+        else if (pivotIndex > k - 1) {
+            return select(k, newArr, low, pivotIndex - 1);
+        }
+
+        else {
+            return select(k, newArr, pivotIndex + 1, high);
+        }
+    }
+
     public static int select2(int k, int[] n) {
         int[] a = MergeSort.mergeSort(n);
         return a[k - 1];
@@ -64,7 +85,8 @@ public class Selection {
     public static void main(String[] args) {
         int[] test = new int[]{4, 5, 1, 2, 3, 7, 6, 9, 8, 0};
 
-        for (int i = 0 ; i < 10 ; i++)
-            System.out.println(select(i, test));
+        for (int i = 1 ; i <= 10 ; i++)
+            // System.out.println(select(i, test));
+            System.out.println(select(i, test, 0, test.length - 1));
     }
 }
