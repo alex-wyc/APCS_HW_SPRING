@@ -31,7 +31,7 @@ public class Selection {
         }
     }
 
-    // FIXME -- Select with partition and altercation
+    // Select with partition and altercation
     // Also, for this one k is the position, not index
 
     public static int select(int k, int[] A, int l, int h) {
@@ -60,7 +60,7 @@ public class Selection {
         pivotIndex = low;
 
         while (low <= high) {
-            newArr[low++] = pivot; // Duplicates cannot hurt right?
+            newArr[low++] = pivot; // Now the empty spot should be the pivot
         }
 
         if (newArr[k - 1] == pivot) {
