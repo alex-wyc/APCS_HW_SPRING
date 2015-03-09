@@ -1,52 +1,63 @@
+import java.util.Arrays;
+
 public class QuickSort {
-    public static int quickSort(int[] A, int l, int h) {
-        // Base case:
-        if (l >= h) {
-            return A[];
+
+    public static int partition(int[] a, int l, int r) {
+	    int tmp;
+		//int pivotIndex = l+rnd.nextInt(r-l);
+		int pivotIndex=l;
+		int pivot = a[pivotIndex];
+		tmp = a[r];
+		a[r] = a[pivotIndex];
+		a[pivotIndex]=tmp;
+				
+		int wall=l;
+		int pcount=1;
+		for (int i=l;i<r;i++) {
+			if (a[i]<pivot) {
+				tmp = a[i];
+	    		a[i]=a[wall];
+				a[wall]=tmp;
+				wall++;
+			}
+    		if (a[i]==pivot)
+				pcount++;
+	    }
+		// now copy over all the pivots
+		int rwall=wall;
+		tmp = a[rwall];
+		a[wall]=a[r];
+		a[r]=tmp;
+		rwall++;
+		for (int i=rwall+1;i<=r;i++) {
+			if (a[i]==pivot) {
+				tmp = a[rwall];
+				a[rwall]=a[i];
+				a[i]=tmp;
+				rwall++;
+			}
+		}
+
+		return (wall+rwall)/2;
+    }
+
+    public static int[] sort(int[] A, int l, int r) {
+        if (l < r) {
+            int pivotIndex = partition(A, l, r);
+            sort(A, l, pivotIndex - 1);
+            sort(A, pivotIndex + 1, r);
         }
 
-        int[] newArr = new int[A.length];
-        int pivotIndex = (l + h) / 2;
-        int pivot = A[pivotIndex];
-        int low = l, high = h;
+        return A;
+    }
 
-        for (int i = l ; i <= h ; i++) {
-            if (A[i] == pivot)
-                continue;
 
-            else if (A[i] > pivot) {
-                newArr[high--] = A[i];
-            }
-            else {
-                newArr[low++] = A[i];
-            }
-        }
+    public static void main(String[] args) {
+        int[] test = new int[]{4, 5, 1, 2, 3, 7, 6, 9, 8, 0};
 
-        pivotIndex = low;
+        int[] sorted = QuickSort.sort(test, 0, test.length - 1);
 
-        while (low <= high) {
-            newArr[low++] = pivot; // Now the empty spot should be the pivot
-        }
-
-        int[] result = new int[A.length];
-
-        int i = 0;
-
-        for (i = 0 ; i < pivotIndex ; i++) {
-            result[i] = 
-        }
-
-        if (newArr[k - 1] == pivot) {
-            return pivot;
-        }
-
-        else if (pivotIndex > k - 1) {
-            return select(k, newArr, l, pivotIndex - 1);
-        }
-
-        else {
-            return select(k, newArr, pivotIndex + 1, h);
-        }
+        System.out.println(Arrays.toString(sorted));
     }
 
 }
