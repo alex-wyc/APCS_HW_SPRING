@@ -23,3 +23,6 @@
 \contentsline {section}{\numberline {9}2015-03-04}{8}
 \contentsline {subsection}{\numberline {9.1}On the Algorithm of the Merge Sort}{8}
 \contentsline {subsection}{\numberline {9.2}Big O Notation}{9}
+\contentsline {section}{\numberline {10}2015-03-05}{9}
+\contentsline {section}{\numberline {11}2015-03-09}{9}
+\contentsline {subsection}{\numberline {11.1}Efficiency of Quick Select}{9}

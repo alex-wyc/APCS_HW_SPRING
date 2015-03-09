@@ -396,4 +396,15 @@ However, there is a more efficient way of doing this.
 
 We can use a binary-search-like algorithm. 
 
+\section{2015-03-09}
+\subsection{Efficiency of Quick Select}
+
+Given that we are lucky, and if the pivot is good such that it bisects the
+array, on the first operation we only go through $\frac{n}{2}$ operations after
+going through the entire array. Then it just divides by 2 each time, so the
+final operation number is:
+
+$$n + \frac{1}{2}n + \frac{1}{4}n + ... = 2n$$
+
+So the quickselect runs on linear time!
 \end{document}

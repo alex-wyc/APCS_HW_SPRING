@@ -33,6 +33,7 @@ public class Selection {
 
     // Select with partition and altercation
     // Also, for this one k is the position, not index
+    // Lookup/help credit goes to Chesley T.
 
     public static int select(int k, int[] A, int l, int h) {
         // Base case:
