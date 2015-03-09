@@ -36,7 +36,6 @@ public class Selection {
 
     public static int select(int k, int[] A, int l, int h) {
         // Base case:
-
         if (l >= h) {
             return A[k - 1];
         }
@@ -47,10 +46,10 @@ public class Selection {
         int low = l, high = h;
 
         for (int i = l ; i <= h ; i++) {
-            if (A[i] == pivot) {
+            if (A[i] == pivot)
                 continue;
-            }
-            if (A[i] > pivot) {
+
+            else if (A[i] > pivot) {
                 newArr[high--] = A[i];
             }
             else {
@@ -69,11 +68,11 @@ public class Selection {
         }
 
         else if (pivotIndex > k - 1) {
-            return select(k, newArr, low, pivotIndex - 1);
+            return select(k, newArr, l, pivotIndex - 1);
         }
 
         else {
-            return select(k, newArr, pivotIndex + 1, high);
+            return select(k, newArr, pivotIndex + 1, h);
         }
     }
 
