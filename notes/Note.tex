@@ -17,7 +17,7 @@
 	keywordstyle = \color{codegreen},
 	numberstyle = \color{codegray},
 	stringstyle = \color{magenta},
-	basicstyle = \footnotesize,
+	basicstyle = \footnotesize\ttfamily,
 	breakatwhitespace = false,
 	breaklines = true,
 	captionpos = b,
@@ -408,7 +408,56 @@ $$n + \frac{1}{2}n + \frac{1}{4}n + ... = 2n$$
 
 So the quickselect runs on linear time!
 
-\section{2015-03-10}
-\subsection{The Complexity of Quicksort}
-As shown before, the quick select has a complexity 
+\section{2015-03-11}
+\subsection{Linked List}
+
+A linked list is comprised of elements/nodes and a way to get to the "start
+node." A node contains some data and information on how to get to the next
+node. There are different forms of linked list. We are going to make the scheme
+list.
+
+\subsection{Scheme-like list in Java}
+\begin{lstlisting}[language=java]
+public class Node {
+    private String data;
+    private Node next; // Self-referencing data structure
+
+    public Node(string s) {
+        data = s;
+    }
+
+    public void setData(String s) {
+        data = s;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void (Node n) {
+        next = n;
+    }
+
+    public Node getNext() {
+        return next;
+    }
+
+    public String toString() {
+        return data;
+    }
+}
+
+public class Driver {
+    public static void main(String[] args) {
+        Node n1 = new Node("Hello");
+        Node n2 = new Node("World");
+
+        System.out.println(n1.getNext().getData()); // prints out "World"
+
+        n.getNext().setData("pickle") // changes n2 to pickle
+
+        System.out.println(n1.getNext().getData()); // prints out "pickle"
+    }
+}
+\end{lstlisting}
 \end{document}
