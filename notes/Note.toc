@@ -29,3 +29,5 @@
 \contentsline {section}{\numberline {12}2015-03-11}{10}
 \contentsline {subsection}{\numberline {12.1}Linked List}{10}
 \contentsline {subsection}{\numberline {12.2}Scheme-like list in Java}{10}
+\contentsline {section}{\numberline {13}2015-03-11}{11}
+\contentsline {subsection}{\numberline {13.1}Print out every element in a linked list}{11}

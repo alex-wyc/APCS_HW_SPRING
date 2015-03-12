@@ -457,6 +457,59 @@ public class Driver {
         n.getNext().setData("pickle") // changes n2 to pickle
 
         System.out.println(n1.getNext().getData()); // prints out "pickle"
+
+        n2.setNext("abc") // Creates a new node and point the next of n2 to it.
+
+        n1.getNext().getNext().setNext("blah");
+
+        n0 = new Node("Start");
+        n0.setNext(n1); // Prefixes n0 to the list
+        // If we want n1 to refer to the start of the list, we do:
+        n1 = n0;
+
+        // Right now the list looks like this:
+        // "Start" --> "Hello" --> "pickle" --> "blah"
+        System.out.println(n1);
+    }
+}
+\end{lstlisting}
+
+\section{2015-03-11}
+
+\subsection{Print out every element in a linked list}
+
+To print everything from an array, we do:
+\begin{lstlisting}[language=java]
+int i = 0;
+while (i < A.length) {
+    System.out.println(A[i]);
+    i++;
+}
+\end{lstlisting}
+
+To do the same for a linked list:
+\begin{lstlisting}[language=java]
+Node tmp = n; // starting node
+while (tmp != null) {
+    System.out.println(tmp);
+    tmp = tmp.getNext();
+}
+
+// With a for loop:
+for (Node tmp = n ; tmp != null ; tmp = tmp.getNext()) {
+    System.out.println(tmp);
+}
+
+// And recursively:
+public static print(Node n) {
+    if (n.getNext() == null) {
+        System.out.println(n);
+        return;
+    }
+
+    else {
+        System.out.println(n);
+        print(n.getNext())
     }
 }
 \end{lstlisting}
