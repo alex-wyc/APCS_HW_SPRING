@@ -18,6 +18,8 @@ public class Driver {
         l.insert(0, "hi");
         System.out.println("done");
         System.out.println(l);
+        l.insert(12, "end");
+        System.out.println(l);
         l.insert(15, "bhsjdl");
     }
 }

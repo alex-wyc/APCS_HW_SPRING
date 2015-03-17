@@ -25,6 +25,7 @@ public class Llist {
 
         if (tmp == null)
             return "null";
+
         return tmp.getData();
     }
 
@@ -36,11 +37,11 @@ public class Llist {
             return;
         }
 
-        for (int i = 0 ; i < n - 1 && currentNode != null && currentNode.getNext() != null; i++) {
+        for (int i = 0 ; i < n - 1 && currentNode != null ; i++) {
             currentNode = currentNode.getNext();
         }
 
-        if (currentNode == null || currentNode.getNext() == null) {
+        if (currentNode == null) {
             throw new IndexOutOfBoundsException();
         }
 
