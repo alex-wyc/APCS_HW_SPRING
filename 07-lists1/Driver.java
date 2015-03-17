@@ -6,20 +6,22 @@ public class Driver {
         Random randgen = new Random();
         Llist l = new Llist();
         for (int i = 0 ; i < 10 ; i++) {
-            l.add("" + i);
+            l.add("" + randgen.nextInt(100));
         }
 
         System.out.println(l);
 
-        System.out.println(l.find(5) + "\n" + l.find(0) + "\n" + l.find(12));
+        System.out.println(l.get(5) + "\n" + l.get(0) + "\n" + l.get(12));
 
         l.insert(3, "hello");
         System.out.println("done");
         l.insert(0, "hi");
         System.out.println("done");
         System.out.println(l);
+        System.out.println(l.length());
         l.insert(12, "end");
         System.out.println(l);
+        System.out.println(l.get(12));
         l.insert(15, "bhsjdl");
     }
 }
