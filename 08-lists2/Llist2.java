@@ -1,9 +1,9 @@
-public class Llist {
-    private Node l = new Node("start");
+public class Llist2 {
+    private Node2 l = new Node2(0);
     private int len = 0;
 
-    public void add(String s) {
-        Node tmp = new Node(s);
+    public void add(int n) {
+        Node2 tmp = new Node2(n);
         tmp.setNext(l.getNext());
         l.setNext(tmp);
         len++;
@@ -11,18 +11,18 @@ public class Llist {
 
     public String toString() {
         String s = "";
-        Node tmp;
+        Node2 tmp;
         for (tmp = l.getNext() ; tmp != null ; tmp = tmp.getNext()) {
-            s = s + tmp + " --> ";
+            s = s + tmp.getData() + " --> ";
         }
         s = s + "null";
         return s;
     }
 
-    public String get(int n) {
-        Node tmp = l;
+    public int get(int n) {
+        Node2 tmp = l;
         if (n >= len) {
-            return "null";
+            return -1;
         }
         for (int i = 0 ; i <= n ; i++) {
             tmp = tmp.getNext();
@@ -31,9 +31,9 @@ public class Llist {
         return tmp.getData();
     }
 
-    public void add(int n, String s) {
-        Node newEl = new Node(s);
-        Node currentNode = l.getNext();
+    public void add(int n, int s) {
+        Node2 newEl = new Node2(s);
+        Node2 currentNode = l.getNext();
 
         if (n > len) {
             throw new IndexOutOfBoundsException();
@@ -53,35 +53,20 @@ public class Llist {
         return len;
     }
 
-    public String remove(int n) {
+    public int remove(int n) {
         if (n >= len || n < 0) {
             throw new IndexOutOfBoundsException();
         }
 
-        Node currentNode = l;
+        Node2 currentNode = l;
 
         for (int i = 0 ; i < n - 1 ; i++) {
             currentNode = currentNode.getNext();
         }
 
-        String removed = currentNode.getNext().getData();
+        int removed = currentNode.getNext().getData();
         currentNode.setNext(currentNode.getNext().getNext());
 
         return removed;
-    }
-
-    public boolean remove(String n) {
-        Node tmp = l;
-
-        while (tmp != null) {
-            if (tmp.getNext().getData().equals(n)) {
-                tmp.setNext(tmp.getNext().getNext());
-                return true;
-            }
-
-            tmp = tmp.getNext();
-        }
-
-        return false;
     }
 }
