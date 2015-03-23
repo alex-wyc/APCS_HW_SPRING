@@ -513,4 +513,32 @@ public static print(Node n) {
     }
 }
 \end{lstlisting}
+
+\section{2015-03-23}
+\subsection{Data Structures}
+\subsubsection{STACKS}
+Stack based objects add on the top and take from the top. This is known as a
+last-in-first-out (\textbf{LIFO}) data structure. Stacks are concepts, it's NOT a basic
+data structure.
+
+Traditionally, a stack has certain operations:
+\begin{lstlisting}[language=java]
+myStack<Integer> s = new myStack<Integer>();
+s.push(10); // Push takes whatever your parameter is and pushes it onto 
+            // the top of the stack
+
+s.push(5); // Now 10 is no longer the top, now 5 is on top
+
+i = s.pop(); // Take the item off of the top of the stack and return it.
+System.out.println(i); // In this case i = 5 and 10 is back on top
+\end{lstlisting}
+
+\textbf{push} and \textbf{pop} are the two BASIC operations that all stack classes have to have,
+but they usually gives out other methods such as \textbf{empty} (check if empty), \textbf{peek}
+or \textbf{top} (returns but doesn't remove),  \textbf{size} (give how many
+elements are in the stack), etc.
+
+\subsection{Assignment}
+Make a class called myStack that mimics a stack, make methods push, pop, empty
+and peek. Use this as an underlying linked list.
 \end{document}
