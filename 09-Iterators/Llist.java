@@ -11,7 +11,7 @@ public class Llist<E> implements Iterable<E>{
     }
 
     public Iterator<E> iterator() {
-        Llit<E> i = new Llit<E>(lead.getNext());
+        Llit<E> i = new Llit<E>(lead);
         return i;
     }
 

@@ -3,12 +3,14 @@ import java.io.*;
 
 public class Llit<E> implements Iterator<E> {
     private Node<E> t;
+    private Node<E> lead;
     private Node<E> lastRet = null;
     private Node<E> twoRetsAgo = null;
     private boolean nexted = false;
 
     public Llit(Node<E> n) {
-        t = n;
+        lead = n;
+        t = n.getNext();
     }
 
     public boolean hasNext() {
@@ -33,6 +35,10 @@ public class Llit<E> implements Iterator<E> {
             if (twoRetsAgo != null) {
                 twoRetsAgo.setNext(t);
                 lastRet = twoRetsAgo;
+            }
+            else {
+                lead.setNext(t);
+                lastRet = lead;
             }
             nexted = false;
         }
