@@ -26,12 +26,14 @@ public class Llit<E> implements Iterator<E> {
 
     public void remove() {
         // FIXME should work but doesn't...
-        // Leaves every other number
+        // leaves first element...
         System.out.println("Two Rets ago: " + twoRetsAgo);
         System.out.println("Last ret: " + lastRet);
         if (nexted) {
-            if (twoRetsAgo != null)
+            if (twoRetsAgo != null) {
                 twoRetsAgo.setNext(t);
+                lastRet = twoRetsAgo;
+            }
             nexted = false;
         }
         else {

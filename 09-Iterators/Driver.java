@@ -13,6 +13,7 @@ public class Driver {
         while (iter.hasNext()) {
             System.out.println(iter.next());
             iter.remove();
+            System.out.println(l);
         }
 
         System.out.println(l);
