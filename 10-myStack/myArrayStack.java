@@ -1,9 +1,7 @@
+import java.util.*;
+
 public class myArrayStack {
     private int[] data;
-    
-    public myArrayStack(int n) {
-        data = new int[n];
-    }
 
     public myArrayStack() {
         data = new int[0];
@@ -19,10 +17,16 @@ public class myArrayStack {
     }
 
     public int top() {
+        if (empty()) {
+            throw new EmptyStackException();
+        }
         return data[0];
     }
 
     public int pop() {
+        if (empty()) {
+            throw new EmptyStackException();
+        }
         int[] data2 = new int[data.length - 1];
         int retVal = data[0];
         for (int i = 0 ; i < data.length - 1 ; i++) {
