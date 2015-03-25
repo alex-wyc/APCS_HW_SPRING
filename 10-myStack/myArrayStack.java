@@ -1,14 +1,14 @@
 import java.util.*;
 
-public class myArrayStack {
-    private int[] data;
+public class myArrayStack<E> {
+    private E[] data;
 
     public myArrayStack() {
-        data = new int[0];
+        data = (E[])new Object[0];
     }
 
-    public void push(int s) {
-        int[] data2 = new int[data.length + 1];
+    public void push(E s) {
+        E[] data2 = (E[])new Object[data.length + 1];
         for (int i = 0 ; i < data.length ; i++) {
             data2[i + 1] = data[i];
         }
@@ -16,19 +16,19 @@ public class myArrayStack {
         data = data2;
     }
 
-    public int top() {
+    public E top() {
         if (empty()) {
             throw new EmptyStackException();
         }
         return data[0];
     }
 
-    public int pop() {
+    public E pop() {
         if (empty()) {
             throw new EmptyStackException();
         }
-        int[] data2 = new int[data.length - 1];
-        int retVal = data[0];
+        E[] data2 = (E[])new Object[data.length - 1];
+        E retVal = data[0];
         for (int i = 0 ; i < data.length - 1 ; i++) {
             data2[i] = data[i + 1];
         }
@@ -42,7 +42,7 @@ public class myArrayStack {
 
     public String toString() {
         String s = "";
-        for (int i : data) {
+        for (E i : data) {
             s = s + i + "\n";
         }
         return s;

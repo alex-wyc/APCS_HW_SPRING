@@ -13,7 +13,7 @@ public class Driver {
 		System.out.println(s.pop());
 		System.out.println(s);
 
-		myArrayStack s2 = new myArrayStack();
+		myArrayStack<Integer> s2 = new myArrayStack<Integer>();
 		System.out.println("empty: " + s2.empty());
 		for (int i = 0 ; i < Integer.parseInt(args[0]) ; i++) {
             s2.push(i);
