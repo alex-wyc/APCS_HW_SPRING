@@ -557,4 +557,58 @@ basic command.
 \subsection{Assignment}
 Implement the queue with a single linked-list, and enqueue and dequeue should be
 able to run at constant time.
+
+\section{2015-03-31}
+\subsection{Maze}
+Review on the maze algorithm we did a few weeks ago:
+\begin{enumerate}
+    \item 2D array of chars
+    \item Recursive Deepth First Search
+\end{enumerate}
+
+
+However, if we had infinite resources, it may be better to do a breadth first
+search. This is a good strat when you suspect that the answer is closer by. This
+is  known as breadth first search.
+
+
+Example maze:
+\begin{lstlisting}
+       ---
+       |B|
+       ---
+       |C|
+     -----------
+     |D|A|E|F|G|
+     -----------
+       |H|
+       ---
+       |I|
+       ---------
+       |J|K|M|I|
+       ---------
+\end{lstlisting}
+
+
+We create a concept called the frontier, which is the "next square to be
+explored."
+
+If we start at square A in the example maze, the frontier would be consisted of
+E, C, D, and H. However, for argument's sake let's say E was the first square to
+be explored, after it is taken off of the frontier. the next square to be
+explored would be one of C, D and H instead of F. So the frontier should be
+stored as a FIFO system, i.e. a queue.
+
+Basic code snippet:
+\begin{lstlisting}[language=java]
+    public void solve(Node position) {
+        while (!frontier.empty()) {
+            current = frontier.dequeue();
+            if (current.equals(exit)) {
+                System.exit(0);
+            }
+        }
+    }
+\end{lstlisting}
+
 \end{document}
