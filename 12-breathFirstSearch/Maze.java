@@ -12,6 +12,7 @@ public class Maze {
     private final char exit = '$';
     private final char visited = '.';
     private final char start = '+';
+    private final char path = '=';
 
     private final int maxX;
     private final int maxY;
@@ -75,6 +76,11 @@ public class Maze {
             char currentChar = current.getStuff();
             //System.out.println(currentChar);
             if (currentChar == exit) {
+                for (Position newPos = current.getPrevious() ; newPos != null ; newPos = newPos.getPrevious()) {
+                    board[newPos.getX()][newPos.getY()] = path;
+                }
+
+                System.out.println(this);
                 System.exit(0);
             }
 
@@ -82,25 +88,25 @@ public class Maze {
                 board[myX][myY] = visited;
                 try {
                     if (board[myX + 1][myY] != visited && board[myX + 1][myY] != wall){
-                        frontier.enqueue(new Position(myX + 1, myY, board[myX + 1][myY]));
+                        frontier.enqueue(new Position(myX + 1, myY, board[myX + 1][myY], current));
                     }
                 } catch (Exception e) {}
 
                 try {
                     if (board[myX - 1][myY] != visited && board[myX - 1][myY] != wall){
-                        frontier.enqueue(new Position(myX - 1, myY, board[myX - 1][myY]));
+                        frontier.enqueue(new Position(myX - 1, myY, board[myX - 1][myY], current));
                     }
                 } catch (Exception e) {}
 
                 try {
                     if (board[myX][myY + 1] != visited && board[myX][myY + 1] != wall){
-                        frontier.enqueue(new Position(myX, myY + 1, board[myX][myY + 1]));
+                        frontier.enqueue(new Position(myX, myY + 1, board[myX][myY + 1], current));
                     }
                 } catch (Exception e) {}
                 
                 try {
                     if (board[myX][myY - 1] != visited && board[myX][myY - 1] != wall){
-                        frontier.enqueue(new Position(myX, myY - 1, board[myX][myY - 1]));
+                        frontier.enqueue(new Position(myX, myY - 1, board[myX][myY - 1], current));
                     }
                 } catch (Exception e) {}
             }
