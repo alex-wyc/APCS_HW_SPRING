@@ -78,6 +78,10 @@ public class Maze {
             if (currentChar == exit) {
                 for (Position newPos = current.getPrevious() ; newPos != null ; newPos = newPos.getPrevious()) {
                     board[newPos.getX()][newPos.getY()] = path;
+                    System.out.println(this);
+                    try {
+                        Thread.sleep(20);
+                    } catch (Exception e) {}
                 }
 
                 System.out.println(this);
