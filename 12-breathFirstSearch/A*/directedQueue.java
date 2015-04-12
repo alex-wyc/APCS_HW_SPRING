@@ -46,7 +46,7 @@ public class directedQueue<E> {
     public String toString() {
         String s = "TOP\n";
         for (Node<E> tmp = top.getNext() ; tmp != null ; tmp = tmp.getNext()) {
-            s = s + tmp.getData() + " " + tmp.getCost() + "\n";
+            s = s + tmp.getData() + "  Cost: " + tmp.getCost() + "\n";
         }
         return s;
     }
