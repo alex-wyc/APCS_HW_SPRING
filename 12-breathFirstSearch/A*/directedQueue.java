@@ -43,6 +43,13 @@ public class directedQueue<E> {
         return top.getNext().getData();
     }
 
+    public int headCost() {
+        if (empty()) {
+            return 0;
+        }
+        return top.getNext().getCost();
+    }
+
     public String toString() {
         String s = "TOP\n";
         for (Node<E> tmp = top.getNext() ; tmp != null ; tmp = tmp.getNext()) {

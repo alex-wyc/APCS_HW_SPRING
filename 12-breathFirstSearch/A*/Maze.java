@@ -78,11 +78,11 @@ public class Maze {
             }
             catch (Exception e) {}
 
+            int currentCost = frontier.headCost();
             Position current = frontier.dequeue();
             myX = current.getX();
             myY = current.getY();
             char currentChar = current.getStuff();
-            int currentCost = manhattanDist(myX, myY);
             if (currentChar == exit) {
                 int stepCount = 1;
                 for (Position newPos = current.getPrevious() ; newPos != null ; newPos = newPos.getPrevious()) {
