@@ -25,17 +25,22 @@ public class Maze {
     public Maze(String filename, int newMaxX, int newMaxY) {
         maxX = newMaxX;
         maxY = newMaxY;
-        board = new char[maxX][maxY];
+        board = new char[maxX + 2][maxY + 2];
+        for (int i = 0 ; i < maxX ; i++) {
+            board[i][0] = wall;
+        }
 
         try {
             Scanner sc = new Scanner(new File(filename));
-            int j = 0;
+            int j = 1;
 
             while (sc.hasNext()) {
                 String line = sc.nextLine();
 
-                for (int i = 0 ; i < maxX ; i++) {
-                    board[i][j] = line.charAt(i);
+                board[0][j] = wall;
+                board[maxX + 1][j] = wall;
+                for (int i = 1 ; i < maxX + 1; i++) {
+                    board[i][j] = line.charAt(i - 1);
                     if (board[i][j] == start) {
                         myX = i;
                         myY = j;
@@ -51,13 +56,16 @@ public class Maze {
             }
         }
         catch(Exception e) {}
+        for (int i = 0 ; i < maxX ; i++) {
+            board[i][maxY + 1] = wall;
+        }
         frontier.enqueue(new Position(myX, myY, board[myX][myY]), manhattanDist(myX, myY));
     }
 
     public String toString() {
         String s = "\033\143";
-        for (int y = 0 ; y < maxY ; y++) {
-            for (int x = 0 ; x < maxX ; x++) {
+        for (int y = 0 ; y < maxY + 2; y++) {
+            for (int x = 0 ; x < maxX + 2 ; x++) {
                 s = s + board[x][y];
             }
 
@@ -101,29 +109,21 @@ public class Maze {
 
             if (currentChar == road || currentChar == start) {
                 board[myX][myY] = visited;
-                try {
-                    if (board[myX + 1][myY] != visited && board[myX + 1][myY] != wall){
-                        frontier.enqueue(new Position(myX + 1, myY, board[myX + 1][myY], current), manhattanDist(myX + 1, myY) + currentCost);
-                    }
-                } catch (Exception e) {}
+                if (board[myX + 1][myY] != visited && board[myX + 1][myY] != wall){
+                    frontier.enqueue(new Position(myX + 1, myY, board[myX + 1][myY], current), manhattanDist(myX + 1, myY) + currentCost);
+                }
 
-                try {
-                    if (board[myX - 1][myY] != visited && board[myX - 1][myY] != wall){
-                        frontier.enqueue(new Position(myX - 1, myY, board[myX - 1][myY], current), manhattanDist(myX - 1, myY) + currentCost);
-                    }
-                } catch (Exception e) {}
+                if (board[myX - 1][myY] != visited && board[myX - 1][myY] != wall){
+                    frontier.enqueue(new Position(myX - 1, myY, board[myX - 1][myY], current), manhattanDist(myX - 1, myY) + currentCost);
+                }
 
-                try {
-                    if (board[myX][myY + 1] != visited && board[myX][myY + 1] != wall){
-                        frontier.enqueue(new Position(myX, myY + 1, board[myX][myY + 1], current), manhattanDist(myX, myY + 1) + currentCost);
-                    }
-                } catch (Exception e) {}
-                
-                try {
-                    if (board[myX][myY - 1] != visited && board[myX][myY - 1] != wall){
-                        frontier.enqueue(new Position(myX, myY - 1, board[myX][myY - 1], current), manhattanDist(myX, myY - 1) + currentCost);
-                    }
-                } catch (Exception e) {}
+                if (board[myX][myY + 1] != visited && board[myX][myY + 1] != wall){
+                    frontier.enqueue(new Position(myX, myY + 1, board[myX][myY + 1], current), manhattanDist(myX, myY + 1) + currentCost);
+                }
+            
+                if (board[myX][myY - 1] != visited && board[myX][myY - 1] != wall){
+                    frontier.enqueue(new Position(myX, myY - 1, board[myX][myY - 1], current), manhattanDist(myX, myY - 1) + currentCost);
+                }
             }
         }
     }
