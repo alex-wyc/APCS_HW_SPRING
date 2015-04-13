@@ -1,4 +1,4 @@
-
+import java.util.Stack;
 import java.util.Random;
 
 public class DepthFirstSearch {
@@ -66,4 +66,19 @@ public class DepthFirstSearch {
         return maze;
     }
 
+    public static void main(String[] args) {
+        DepthFirstSearch dfs = new DepthFirstSearch();
+        char[][] maze1 = new char[Integer.parseInt(args[0])][Integer.parseInt(args[1])];
+        char[][] board = dfs.DFS(100, maze1);
+        String s = ""; //"\033\143";
+        for (int y = 0 ; y < board.length ; y++) {
+            for (int x = 0 ; x < board[0].length ; x++) {
+                s = s + board[y][x];
+            }
+
+            s = s + "\n";
+        }
+        System.out.println(s);
+
+    }
 }
