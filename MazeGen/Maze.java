@@ -17,7 +17,7 @@ public class Maze {
     private final int maxX;
     private final int maxY;
 
-    private myQueue<Position> frontier = new myQueue<Position>();
+    private MyStack<Position> frontier = new MyStack<Position>();
 
     public Maze(String filename, int newMaxX, int newMaxY) {
         maxX = newMaxX;
@@ -43,7 +43,7 @@ public class Maze {
             }
         }
         catch(Exception e) {}
-        frontier.enqueue(new Position(myX, myY, board[myX][myY]));
+        frontier.push(new Position(myX, myY, board[myX][myY]));
     }
 
     public String toString() {
@@ -60,34 +60,31 @@ public class Maze {
 
     public void solve() {
         while(!frontier.empty()) {
-//            System.out.println(this);
-//            try {
-//                Thread.sleep(20);
-//            }
-//            catch (Exception e) {}
+            System.out.println(this);
+            try {
+                Thread.sleep(20);
+            }
+            catch (Exception e) {}
 
             //System.out.println(frontier);
             //System.out.println(frontier.empty());
 
-            Position current = frontier.dequeue();
+            Position current = frontier.pop();
             //System.out.println(current);
             myX = current.getX();
             myY = current.getY();
             char currentChar = current.getStuff();
             //System.out.println(currentChar);
             if (currentChar == exit) {
-                int stepCount = 1;
                 for (Position newPos = current.getPrevious() ; newPos != null ; newPos = newPos.getPrevious()) {
                     board[newPos.getX()][newPos.getY()] = path;
-                    stepCount++;
                     System.out.println(this);
-/*                    try {
+                    try {
                         Thread.sleep(20);
                     } catch (Exception e) {}
-*/                }
+                }
 
                 System.out.println(this);
-                System.out.println(stepCount);
                 System.exit(0);
             }
 
@@ -95,25 +92,25 @@ public class Maze {
                 board[myX][myY] = visited;
                 try {
                     if (board[myX + 1][myY] != visited && board[myX + 1][myY] != wall){
-                        frontier.enqueue(new Position(myX + 1, myY, board[myX + 1][myY], current));
+                        frontier.push(new Position(myX + 1, myY, board[myX + 1][myY], current));
                     }
                 } catch (Exception e) {}
 
                 try {
                     if (board[myX - 1][myY] != visited && board[myX - 1][myY] != wall){
-                        frontier.enqueue(new Position(myX - 1, myY, board[myX - 1][myY], current));
+                        frontier.push(new Position(myX - 1, myY, board[myX - 1][myY], current));
                     }
                 } catch (Exception e) {}
 
                 try {
                     if (board[myX][myY + 1] != visited && board[myX][myY + 1] != wall){
-                        frontier.enqueue(new Position(myX, myY + 1, board[myX][myY + 1], current));
+                        frontier.push(new Position(myX, myY + 1, board[myX][myY + 1], current));
                     }
                 } catch (Exception e) {}
                 
                 try {
                     if (board[myX][myY - 1] != visited && board[myX][myY - 1] != wall){
-                        frontier.enqueue(new Position(myX, myY - 1, board[myX][myY - 1], current));
+                        frontier.push(new Position(myX, myY - 1, board[myX][myY - 1], current));
                     }
                 } catch (Exception e) {}
             }

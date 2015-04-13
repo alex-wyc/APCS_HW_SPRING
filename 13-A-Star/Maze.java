@@ -80,12 +80,12 @@ public class Maze {
 
     public void solve() {
         while (!frontier.empty()) {
-            System.out.println(this);
+/*            System.out.println(this);
             try {
                 Thread.sleep(20);
             }
             catch (Exception e) {}
-
+*/
             int currentCost = frontier.headCost();
             Position current = frontier.dequeue();
             myX = current.getX();
@@ -97,9 +97,9 @@ public class Maze {
                     board[newPos.getX()][newPos.getY()] = path;
                     stepCount++;
                     System.out.println(this);
-                    try {
+/*                    try {
                         Thread.sleep(20);
-                    } catch (Exception e) {}
+                    } catch (Exception e) {}*/
                 }
 
                 System.out.println(this);
