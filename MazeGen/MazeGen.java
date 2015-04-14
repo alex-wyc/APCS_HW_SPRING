@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.io.PrintWriter;
+import java.io.File;
 
 public class MazeGen {
     private Random randgen = new Random();
@@ -7,6 +9,8 @@ public class MazeGen {
     private boolean[][] visitedCells;
     private int myX;
     private int myY;
+    private int lastX;
+    private int lastY;
 
     private final char road = '#';
     private final char wall = ' ';
@@ -46,12 +50,14 @@ public class MazeGen {
         board[exitY][exitX] = exit;
 
         frontier.push(new Position(exitX, exitY, null));
+        lastX = exitX;
+        lastY = exitY;
         
         visited = 1;
     }
 
     public String toString() {
-        String s = "\033\143";
+        String s = "";//"\033\143";
         for (int y = 0 ; y < maxY ; y++) {
             for (int x = 0 ; x < maxX ; x++) {
                 s = s + board[y][x];
@@ -68,95 +74,83 @@ public class MazeGen {
 
     public void generate() {
         while (visited < size) {
-            System.out.println(this);
+            //System.out.println(this);
+            //System.out.println(visited);
             try {
                 Thread.sleep(20);
             } catch (Exception e) {}
-            Position current;
-            try {
-                current = frontier.pop();
-            } catch (Exception e) {break;}
+            Position current = frontier.pop();
             myX = current.getX();
             myY = current.getY();
-            while (getRandNeighbor(myX, myY, current) == null) {
-                current = current.getPrevious();
-                myX = current.getX();
-                myY = current.getY();
-            }
+            try {
+                lastX = current.getPrevious().getX();
+                lastY = current.getPrevious().getY();
+            } catch (Exception e) {}
 
-            frontier.push(getRandNeighbor(myX, myY, current));
-            if (board[myY][myX] == wall)
-                board[myY][myX] = road;
+            board[myY][myX] = board[lastY + ((myY - lastY) / 2)][lastX + ((myX - lastX) / 2)] = road;
+
+            pushAllNeighbor(myX, myY, current);
+
             visited++;
         }
         board[myY][myX] = start;
+        board[exitY][exitX] = exit;
+        System.out.println("\033\143");
         System.out.println(this);
         try {
             Thread.sleep(200);
         } catch (Exception e) {}
     }
 
-    private Position getRandNeighbor(int X, int Y, Position current) {
-        boolean[] neighborList = new boolean[4];
-        boolean isEmpty = true;
+    private void pushAllNeighbor(int X, int Y, Position current) {
+        Position[] neighborList = new Position[4];
         
         try {
             if (board[Y + 2][X] == wall) {
-                neighborList[0] = true;
-                isEmpty = false;
+                neighborList[0] = new Position(X, Y + 2, current);
             }
         } catch (Exception e) {}          
         try {
             if (board[Y - 2][X] == wall) {
-                neighborList[1] = true;
-                isEmpty = false;
+                neighborList[1] = new Position(X, Y - 2, current);
             }
         } catch (Exception e) {}       
         try {
             if (board[Y][X + 2] == wall) {
-                neighborList[2] = true;
-                isEmpty = false;
+                neighborList[2] = new Position(X + 2, Y, current);
             }
         } catch (Exception e) {}       
         try {
             if (board[Y][X - 2] == wall) {
-                neighborList[3] = true;
-                isEmpty = false;
+                neighborList[3] = new Position(X - 2, Y, current);
             }
         } catch (Exception e) {}
 
-        if (isEmpty) {
-            return null;
-        }
+        shuffleArray(neighborList);
 
-        int direction = randgen.nextInt(4);
-        while (!neighborList[direction]) {
-            direction = randgen.nextInt(4);
+        for (int i = 0 ; i < 4 ; i++) {
+            if (neighborList[i] != null) {
+                frontier.push(neighborList[i]);
+            }
         }
+    }
 
-        switch (direction) {
-            case 0:
-                board[Y + 1][X] = road;
-                return new Position(X, Y + 2, current);
-                
-            case 1:
-                board[Y - 1][X] = road;
-                return new Position(X, Y - 2, current);
-                
-            case 2:
-                board[Y][X + 1] = road;
-                return new Position(X + 2, Y, current);
-                
-            case 3:
-                board[Y][X - 1] = road;
-                return new Position(X - 2, Y, current);
-                
+    private void shuffleArray(Position[] arr) {
+        for (int i = arr.length - 1 ; i > 0 ; i--) {
+            int index = randgen.nextInt(i + 1);
+            Position tmp = arr[index];
+            arr[index] = arr[i];
+            arr[i] = tmp;
         }
-        return null;
     }
 
     public static void main(String[] args) {
         MazeGen mg = new MazeGen(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
         mg.generate();
+        try {
+            PrintWriter pw = new PrintWriter(new File(args[2]));
+            pw.print(mg.toString());
+            pw.close();
+        } catch (Exception e) {}
     }
 }
