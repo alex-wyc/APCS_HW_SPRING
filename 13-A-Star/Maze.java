@@ -62,10 +62,35 @@ public class Maze {
         frontier.enqueue(new Position(myX, myY, board[myX][myY]), manhattanDist(myX, myY));
     }
 
+    public Maze(char[][] myBoard) {
+        maxY = myBoard.length;
+        maxX = myBoard[0].length;
+        board = new char[maxX + 2][maxY + 2];
+        for (int i = 0 ; i < maxX ; i++) {
+            board[i][0] = wall;
+        }
+        for (int i = 1 ; i < maxY + 1 ; i++) {
+            board[0][i] = board[maxX + 1][i] = wall;
+            for (int j = 1 ; j < maxX + 1 ; j++) {
+                board[j][i] = myBoard[j - 1][i - 1];
+                if (board[j][i] == start) {
+                    myX = j;
+                    myY = i;
+                }
+                if (board[j][i] == exit) {
+                    exitX = j;
+                    exitY = i;
+                }
+            }
+        }
+        frontier.enqueue(new Position(myX, myY, board[myX][myY]), manhattanDist(myX, myY));
+    }
+
     public String toString() {
         String s = "\033\143";
         for (int y = 0 ; y < maxY + 2; y++) {
             for (int x = 0 ; x < maxX + 2 ; x++) {
+                //System.out.printf("(%d, %d)", x, y);
                 s = s + board[x][y];
             }
 
@@ -80,7 +105,7 @@ public class Maze {
 
     public void solve() {
         while (!frontier.empty()) {
-/*            System.out.println(this);
+            System.out.println(this);/*
             try {
                 Thread.sleep(20);
             }
@@ -126,11 +151,20 @@ public class Maze {
                 }
             }
         }
-    }
 
+        System.out.println(this);
+    }
+/*
     public static void main(String[] args) {
-        Maze maze1 = new Maze(args[0], 40, 20);
+        MazeGen generator = new MazeGen(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+        generator.generate();
+        Maze maze1 = new Maze(generator.getBoard());
         System.out.println(maze1);
+        maze1.solve();
+    }
+*/
+    public static void main(String[] args) {
+        Maze maze1 = new Maze(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));
         maze1.solve();
     }
 }

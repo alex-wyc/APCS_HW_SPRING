@@ -18,6 +18,12 @@ public class Node<E> {
         cost = c;
     }
 
+    public Node(E s) {
+        data = s;
+        next = null;
+        cost = 0;
+    }
+
     public void setData(E s) {
         data = s;
     }

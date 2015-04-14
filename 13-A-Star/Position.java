@@ -11,6 +11,12 @@ public class Position {
         previous = myPrevious;
     }
 
+    public Position(int myX, int myY, Position myPrevious) {
+        x = myX;
+        y = myY;
+        previous = myPrevious;
+    }
+
     public Position(int myX, int myY, char myStuff){
         x = myX;
         y = myY;

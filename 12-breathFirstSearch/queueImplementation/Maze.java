@@ -121,7 +121,7 @@ public class Maze {
     }
 
     public static void main(String[] args) {
-        Maze maze1 = new Maze(args[0], 40, 20);
+        Maze maze1 = new Maze(args[0], 101, 101);
         System.out.println(maze1);
         maze1.solve();
     }
