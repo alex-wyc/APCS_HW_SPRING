@@ -57,7 +57,7 @@ public class MazeGen {
     }
 
     public String toString() {
-        String s = "";//"\033\143";
+        String s = "\033\143";
         for (int y = 0 ; y < maxY ; y++) {
             for (int x = 0 ; x < maxX ; x++) {
                 s = s + board[y][x];
@@ -74,7 +74,7 @@ public class MazeGen {
 
     public void generate() {
         while (visited < size) {
-            //System.out.println(this);
+            System.out.println(this);
             //System.out.println(visited);
             try {
                 Thread.sleep(20);
@@ -88,7 +88,6 @@ public class MazeGen {
             } catch (Exception e) {}
 
             board[myY][myX] = board[lastY + ((myY - lastY) / 2)][lastX + ((myX - lastX) / 2)] = road;
-
             pushAllNeighbor(myX, myY, current);
 
             visited++;
@@ -128,9 +127,13 @@ public class MazeGen {
 
         shuffleArray(neighborList);
 
-        for (int i = 0 ; i < 4 ; i++) {
+        int a = 2;
+        for (int i = 0 ; i < a && a < 4 ; i++) {
             if (neighborList[i] != null) {
                 frontier.push(neighborList[i]);
+            }
+            else {
+                a++;
             }
         }
     }
@@ -140,6 +143,7 @@ public class MazeGen {
             int index = randgen.nextInt(i + 1);
             Position tmp = arr[index];
             arr[index] = arr[i];
+
             arr[i] = tmp;
         }
     }
