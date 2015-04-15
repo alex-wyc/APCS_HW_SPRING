@@ -20,6 +20,9 @@ public class Maze {
     private int exitX;
     private int exitY;
 
+    private int startX;
+    private int startY;
+
     private directedQueue<Position> frontier = new directedQueue<Position>();
 
     public Maze(String filename, int newMaxX, int newMaxY) {
@@ -44,6 +47,9 @@ public class Maze {
                     if (board[i][j] == start) {
                         myX = i;
                         myY = j;
+
+                        startX = myX;
+                        startY = myY;
                     }
 
                     if (board[i][j] == exit) {
@@ -74,8 +80,8 @@ public class Maze {
             for (int j = 1 ; j < maxX + 1 ; j++) {
                 board[j][i] = myBoard[j - 1][i - 1];
                 if (board[j][i] == start) {
-                    myX = j;
-                    myY = i;
+                    startX = myX = j;
+                    startY = myY = i;
                 }
                 if (board[j][i] == exit) {
                     exitX = j;
@@ -126,6 +132,8 @@ public class Maze {
                         Thread.sleep(20);
                     } catch (Exception e) {}*/
                 }
+
+                board[startX][startY] = start;
 
                 System.out.println(this);
                 System.out.println(stepCount);
