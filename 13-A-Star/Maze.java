@@ -105,7 +105,7 @@ public class Maze {
 
     public void solve() {
         while (!frontier.empty()) {
-            System.out.println(this);/*
+            /*System.out.println(this);/*
             try {
                 Thread.sleep(20);
             }
