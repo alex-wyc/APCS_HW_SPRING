@@ -154,17 +154,24 @@ public class Maze {
 
         System.out.println(this);
     }
-/*
+
     public static void main(String[] args) {
-        MazeGen generator = new MazeGen(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-        generator.generate();
-        Maze maze1 = new Maze(generator.getBoard());
-        System.out.println(maze1);
-        maze1.solve();
+        if (args[0].equals("-c")) {
+            MazeGen generator = new MazeGen(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+            generator.generate();
+            Maze maze1 = new Maze(generator.getBoard());
+            System.out.println(maze1);
+            maze1.solve();
+        }
+        else if (args[0].equals("-f")) {
+            Maze maze1 = new Maze(args[1], Integer.parseInt(args[2]), Integer.parseInt(args[3]));
+            maze1.solve();
+        }
     }
-*/
+/*
     public static void main(String[] args) {
         Maze maze1 = new Maze(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));
         maze1.solve();
     }
+*/
 }
