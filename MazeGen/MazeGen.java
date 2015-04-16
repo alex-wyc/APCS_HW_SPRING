@@ -76,16 +76,16 @@ public class MazeGen {
         while (visited < size) {
             //System.out.println(this);
             //System.out.println(visited);
-            try {
-                Thread.sleep(20);
-            } catch (Exception e) {}
+            //try {
+            //    Thread.sleep(20);
+            //} catch (Exception e) {}
             Position current = frontier.pop();
             myX = current.getX();
             myY = current.getY();
-            try {
+            if (current.getPrevious() != null) {
                 lastX = current.getPrevious().getX();
                 lastY = current.getPrevious().getY();
-            } catch (Exception e) {}
+            }
 
             board[myY][myX] = board[lastY + ((myY - lastY) / 2)][lastX + ((myX - lastX) / 2)] = road;
             pushAllNeighbor(myX, myY, current);
@@ -96,34 +96,26 @@ public class MazeGen {
         board[exitY][exitX] = exit;
         System.out.println("\033\143");
         System.out.println(this);
-        try {
-            Thread.sleep(200);
-        } catch (Exception e) {}
     }
 
     private void pushAllNeighbor(int X, int Y, Position current) {
         Position[] neighborList = new Position[4];
-        
-        try {
-            if (board[Y + 2][X] == wall) {
-                neighborList[0] = new Position(X, Y + 2, current);
-            }
-        } catch (Exception e) {}          
-        try {
-            if (board[Y - 2][X] == wall) {
-                neighborList[1] = new Position(X, Y - 2, current);
-            }
-        } catch (Exception e) {}       
-        try {
-            if (board[Y][X + 2] == wall) {
-                neighborList[2] = new Position(X + 2, Y, current);
-            }
-        } catch (Exception e) {}       
-        try {
-            if (board[Y][X - 2] == wall) {
-                neighborList[3] = new Position(X - 2, Y, current);
-            }
-        } catch (Exception e) {}
+
+        if (board.length - Y > 2 && board[Y + 2][X] == wall) {
+            neighborList[0] = new Position(X, Y + 2, current);
+        }
+
+        if (Y > 2 && board[Y - 2][X] == wall) {
+            neighborList[1] = new Position(X, Y - 2, current);
+        }
+
+        if (board[0].length - X > 2 && board[Y][X + 2] == wall) {
+            neighborList[2] = new Position(X + 2, Y, current);
+        }
+
+        if (X > 2 && board[Y][X - 2] == wall) {
+            neighborList[3] = new Position(X - 2, Y, current);
+        }
 
         shuffleArray(neighborList);
 
