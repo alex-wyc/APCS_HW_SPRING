@@ -74,7 +74,7 @@ public class MazeGen {
 
     public void generate() {
         while (visited < size) {
-            System.out.println(this);
+            //System.out.println(this);
             //System.out.println(visited);
             try {
                 Thread.sleep(20);
