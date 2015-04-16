@@ -1,8 +1,9 @@
-public class Position {
+public class Position implements Comparable {
     private int x;
     private int y;
     private Position previous;
     private char stuff;
+    private int cost;
 
     public Position(int myX, int myY, Position myPrev){
         x = myX;

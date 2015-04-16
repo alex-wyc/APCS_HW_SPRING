@@ -1,5 +1,6 @@
-import java.util.*;
-import java.io.*;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+import java.io.File;
 
 public class Maze {
     private char[][] board;
@@ -23,7 +24,7 @@ public class Maze {
     private int startX;
     private int startY;
 
-    private directedQueue<Position> frontier = new directedQueue<Position>();
+    private PriorityQueue<Position> frontier = new PriorityQueue<Position>();
 
     public Maze(String filename, int newMaxX, int newMaxY) {
         maxX = newMaxX;
@@ -65,7 +66,7 @@ public class Maze {
         for (int i = 0 ; i < maxX ; i++) {
             board[i][maxY + 1] = wall;
         }
-        frontier.enqueue(new Position(myX, myY, board[myX][myY]), manhattanDist(myX, myY));
+        frontier.add(new Position(myX, myY, board[myX][myY]), manhattanDist(myX, myY));
     }
 
     public Maze(char[][] myBoard) {
@@ -89,7 +90,7 @@ public class Maze {
                 }
             }
         }
-        frontier.enqueue(new Position(myX, myY, board[myX][myY]), manhattanDist(myX, myY));
+        frontier.add(new Position(myX, myY, board[myX][myY]), manhattanDist(myX, myY));
     }
 
     public String toString() {
@@ -118,7 +119,7 @@ public class Maze {
             catch (Exception e) {}
 */
             int currentCost = frontier.headCost();
-            Position current = frontier.dequeue();
+            Position current = frontier.poll();
             myX = current.getX();
             myY = current.getY();
             char currentChar = current.getStuff();
@@ -143,19 +144,19 @@ public class Maze {
             if (currentChar == road || currentChar == start) {
                 board[myX][myY] = visited;
                 if (board[myX + 1][myY] != visited && board[myX + 1][myY] != wall){
-                    frontier.enqueue(new Position(myX + 1, myY, board[myX + 1][myY], current), manhattanDist(myX + 1, myY) + currentCost);
+                    frontier.add(new Position(myX + 1, myY, board[myX + 1][myY], current), manhattanDist(myX + 1, myY) + currentCost);
                 }
 
                 if (board[myX - 1][myY] != visited && board[myX - 1][myY] != wall){
-                    frontier.enqueue(new Position(myX - 1, myY, board[myX - 1][myY], current), manhattanDist(myX - 1, myY) + currentCost);
+                    frontier.add(new Position(myX - 1, myY, board[myX - 1][myY], current), manhattanDist(myX - 1, myY) + currentCost);
                 }
 
                 if (board[myX][myY + 1] != visited && board[myX][myY + 1] != wall){
-                    frontier.enqueue(new Position(myX, myY + 1, board[myX][myY + 1], current), manhattanDist(myX, myY + 1) + currentCost);
+                    frontier.add(new Position(myX, myY + 1, board[myX][myY + 1], current), manhattanDist(myX, myY + 1) + currentCost);
                 }
             
                 if (board[myX][myY - 1] != visited && board[myX][myY - 1] != wall){
-                    frontier.enqueue(new Position(myX, myY - 1, board[myX][myY - 1], current), manhattanDist(myX, myY - 1) + currentCost);
+                    frontier.add(new Position(myX, myY - 1, board[myX][myY - 1], current), manhattanDist(myX, myY - 1) + currentCost);
                 }
             }
         }
