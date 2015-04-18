@@ -1,26 +1,40 @@
-public class Position {
+public class Position implements Comparable{
     private int x;
     private int y;
-    private char stuff;
     private Position previous;
+    private char stuff;
+    private int cost;
 
-    public Position(int myX, int myY, char myStuff, Position myPrevious) {
+    public Position(int myX, int myY, Position myPrev){
+        x = myX;
+        y = myY;
+        previous = myPrev;
+    }
+
+    public Position(int myX, int myY, char myStuff) {
         x = myX;
         y = myY;
         stuff = myStuff;
-        previous = myPrevious;
     }
 
-    public Position(int myX, int myY, Position myPrevious) {
-        x = myX;
-        y = myY;
-        previous = myPrevious;
-    }
-
-    public Position(int myX, int myY, char myStuff){
+    public Position(int myX, int myY, char myStuff, Position myPrev) {
         x = myX;
         y = myY;
         stuff = myStuff;
+        previous = myPrev;
+    }
+
+    public Position(int myX, int myY, char myStuff, Position myPrev, int myCost) {
+        x = myX;
+        y = myY;
+        stuff = myStuff;
+        previous = myPrev;
+        cost = myCost;
+    }
+
+    public int compareTo(Object other) {
+        Position otherPos = (Position) other;
+        return cost - otherPos.getCost();
     }
 
     public int getX() {
@@ -37,5 +51,9 @@ public class Position {
 
     public Position getPrevious() {
         return previous;
+    }
+
+    public int getCost() {
+        return cost;
     }
 }

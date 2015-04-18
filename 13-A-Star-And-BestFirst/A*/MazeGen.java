@@ -1,6 +1,8 @@
 import java.util.Random;
-import java.io.PrintWriter;
-import java.io.File;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.lang.StringBuilder;
+import java.util.Stack;
 
 public class MazeGen {
     private Random randgen = new Random();
@@ -25,7 +27,7 @@ public class MazeGen {
     private int exitY;
     private int visited;
 
-    private MyStack<Position> frontier = new MyStack<Position>();
+    private Stack<Position> frontier = new Stack<Position>();
 
     public MazeGen(int NMaxX, int NMaxY) {
         maxX = NMaxX;
@@ -57,15 +59,14 @@ public class MazeGen {
     }
 
     public String toString() {
-        String s = "\033\143";
+        StringBuilder s = new StringBuilder();
         for (int y = 0 ; y < maxY ; y++) {
             for (int x = 0 ; x < maxX ; x++) {
-                s = s + board[y][x];
+                s.append(board[y][x]);
             }
-
-            s = s + "\n";
+            s.append("\n");
         }
-        return s;
+        return s.toString();
     }
 
     public char[][] getBoard() {
@@ -74,18 +75,18 @@ public class MazeGen {
 
     public void generate() {
         while (visited < size) {
-            System.out.println(this);
+            //System.out.println(this);
             //System.out.println(visited);
-            try {
-                Thread.sleep(20);
-            } catch (Exception e) {}
+            //try {
+            //    Thread.sleep(20);
+            //} catch (Exception e) {}
             Position current = frontier.pop();
             myX = current.getX();
             myY = current.getY();
-            try {
+            if (current.getPrevious() != null) {
                 lastX = current.getPrevious().getX();
                 lastY = current.getPrevious().getY();
-            } catch (Exception e) {}
+            }
 
             board[myY][myX] = board[lastY + ((myY - lastY) / 2)][lastX + ((myX - lastX) / 2)] = road;
             pushAllNeighbor(myX, myY, current);
@@ -94,36 +95,29 @@ public class MazeGen {
         }
         board[myY][myX] = start;
         board[exitY][exitX] = exit;
-        System.out.println("\033\143");
-        System.out.println(this);
-        try {
-            Thread.sleep(200);
-        } catch (Exception e) {}
+        //System.out.println("\033\143");
+        //System.out.println(this);
+    }
+
+    private boolean inBounds(int x, int y) {
+        return (x >= 0 && x < maxX && y > 0 && y < maxY);
     }
 
     private void pushAllNeighbor(int X, int Y, Position current) {
         Position[] neighborList = new Position[4];
+        if (inBounds(X, Y+2) && board[Y + 2][X] == wall) {
+            neighborList[0] = new Position(X, Y + 2, current);
+        }
         
-        try {
-            if (board[Y + 2][X] == wall) {
-                neighborList[0] = new Position(X, Y + 2, current);
-            }
-        } catch (Exception e) {}          
-        try {
-            if (board[Y - 2][X] == wall) {
-                neighborList[1] = new Position(X, Y - 2, current);
-            }
-        } catch (Exception e) {}       
-        try {
-            if (board[Y][X + 2] == wall) {
-                neighborList[2] = new Position(X + 2, Y, current);
-            }
-        } catch (Exception e) {}       
-        try {
-            if (board[Y][X - 2] == wall) {
-                neighborList[3] = new Position(X - 2, Y, current);
-            }
-        } catch (Exception e) {}
+        if (inBounds(X, Y-2) && board[Y - 2][X] == wall) {
+            neighborList[1] = new Position(X, Y - 2, current);
+        }
+        if (inBounds(X+2, Y) && board[Y][X + 2] == wall) {
+            neighborList[2] = new Position(X + 2, Y, current);
+        }
+        if (inBounds(X-2, Y) && board[Y][X - 2] == wall) {
+            neighborList[3] = new Position(X - 2, Y, current);
+        }
 
         shuffleArray(neighborList);
 
@@ -152,9 +146,9 @@ public class MazeGen {
         MazeGen mg = new MazeGen(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
         mg.generate();
         try {
-            PrintWriter pw = new PrintWriter(new File(args[2]));
-            pw.print(mg.toString());
-            pw.close();
+            BufferedWriter w = new BufferedWriter(new FileWriter(args[2]));
+            w.write(mg.toString().substring(mg.getBoard().length + 1));
+            w.close();
         } catch (Exception e) {}
     }
 }

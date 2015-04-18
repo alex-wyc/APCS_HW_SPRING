@@ -1,4 +1,4 @@
-public class Position implements Comparable {
+public class Position implements Comparable{
     private int x;
     private int y;
     private Position previous;
@@ -24,6 +24,19 @@ public class Position implements Comparable {
         previous = myPrev;
     }
 
+    public Position(int myX, int myY, char myStuff, Position myPrev, int myCost) {
+        x = myX;
+        y = myY;
+        stuff = myStuff;
+        previous = myPrev;
+        cost = myCost;
+    }
+
+    public int compareTo(Object other) {
+        Position otherPos = (Position) other;
+        return cost - otherPos.getCost();
+    }
+
     public int getX() {
         return x;
     }
@@ -38,5 +51,9 @@ public class Position implements Comparable {
 
     public Position getPrevious() {
         return previous;
+    }
+
+    public int getCost() {
+        return cost;
     }
 }
