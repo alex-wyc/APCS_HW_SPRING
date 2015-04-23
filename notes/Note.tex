@@ -644,5 +644,46 @@ has the fullest amount of children
 \textbf{Binary Tree}: A tree in which each node is either a leaf or has 1 or 2
 chidren.
 
+\section{2015-4-23}
+\subsection{Design of the Node}
 
+The tree is based on a double-linked list, each node should have two private
+Nodes left, and right and generic data.
+
+\subsection{Binary Search Tree}
+
+It is a binary tree such that given any Node w/ value v, all the node in the
+left subtree has values < V and all nodes in the right subtree have values
+greater than V.
+
+\subsection{Sample Algorithms}
+\begin{lstlisting}[language=java]
+public Node Search (Node T, Integer i) {
+    while (T != null) {
+        int c = T.getData().compareTo(i);
+        if (c == 0) {
+            return T;
+        }
+        T = (c > 0) ? T.getRight() : T.getLeft();
+    }
+    return null;
+}
+
+public insert (Node T) {
+    Node tmp1 = root;
+    Node tmp2 = null;
+    while (tmp1 != null) {
+        int c = T.getData().compareTo(tmp1.getData());
+        tmp2 = tmp1;
+        tmp1 = (c > 0) ? tmp1.getRight() : tmp1.getLeft();
+    }
+    int c = T.getData().compareTo(tmp2.getData());
+    if (c > 0) {
+        tmp2.setRight(T);
+    }
+    else {
+        tmp2.setLeft(T);
+    }
+}
+\end{lstlisting}
 \end{document}
