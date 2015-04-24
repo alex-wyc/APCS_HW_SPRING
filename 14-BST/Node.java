@@ -1,4 +1,4 @@
-public class Node<T implements Comparable> {
+public class Node<T extends Comparable<T>> {
     private T data;
     private Node<T> left;
     private Node<T> right;
@@ -17,5 +17,17 @@ public class Node<T implements Comparable> {
 
     public T getData() {
         return data;
+    }
+
+    public boolean isLeaf() {
+        return (left == null) && (right == null);
+    }
+
+    public void setLeft(Node<T> newLeft) {
+        left = newLeft;
+    }
+
+    public void setRight(Node<T> newRight) {
+        right = newRight;
     }
 }
