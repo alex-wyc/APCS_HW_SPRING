@@ -90,10 +90,10 @@ public class BST<T extends Comparable<T>> {
 
         String newPrefix = prefix;
         if (left) {
-            newPrefix = newPrefix + "<";
+            newPrefix = newPrefix + "├";
         }
         else {
-            newPrefix = newPrefix + ">";
+            newPrefix = newPrefix + "└";
         }
         
         return newPrefix + current.getData() + "\n" + toStringSubTree(current.getLeft(), true, newPrefix) + toStringSubTree(current.getRight(), false, newPrefix);

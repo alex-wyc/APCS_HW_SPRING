@@ -7,8 +7,6 @@ public class Node<T extends Comparable<T>> {
         data = newData;
     }
 
-    public Node(T newData, Node<T> newLeft, Node<T> newRight)
-
     public Node<T> getLeft() {
         return left;
     }
