@@ -57,20 +57,18 @@ public class BST<T extends Comparable<T>> {
     }
 
     private void insertRH(Node current, T i) {
-        if (current.isLeaf()) {
-            if (current.getData().compareTo(i) > 0) {
-                current.setLeft(new Node<T>(i));
-            }
-            else {
-                current.setRight(new Node<T>(i));
-            }
-            return;
-        }
-
         if (current.getData().compareTo(i) > 0) {
+            if (current.getLeft() == null) {
+                current.setLeft(new Node<T>(i));
+                return;
+            }
             insertRH(current.getLeft(), i);
         }
         else {
+            if (current.getRight() == null) {
+                current.setRight(new Node<T>(i));
+                return;
+            }
             insertRH(current.getRight(), i);
         }
     }
@@ -88,7 +86,20 @@ public class BST<T extends Comparable<T>> {
             return "";
         }
 
-        String newPrefix = prefix;
+        String newPrefix = "";
+        
+        String newChar = " ";
+        if (prefix.length() > 0 && prefix.charAt(prefix.length()-1) == '├') {
+            newChar = "|";
+        }
+        for (int i = 0 ; i < prefix.length() ; i++){
+            if (prefix.charAt(i) != ' ') {
+                newPrefix = newPrefix + newChar;
+            }
+            else {
+                newPrefix = newPrefix + ' ';
+            }
+        }
         if (left) {
             newPrefix = newPrefix + "├";
         }
@@ -116,6 +127,10 @@ public class BST<T extends Comparable<T>> {
         System.out.println(tmp.searchR(8).getData().toString());
 
         tmp.insertR(100);
+        tmp.insertR(4);
+        tmp.insertR(15);
+        tmp.insertR(18);
+        tmp.insertR(101);
 
         System.out.println(tmp);
     }
