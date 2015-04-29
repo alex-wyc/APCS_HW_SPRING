@@ -90,7 +90,7 @@ public class BST<T extends Comparable<T>> {
         
         String newChar = " ";
         if (prefix.length() > 0 && prefix.charAt(prefix.length()-1) == '├') {
-            newChar = "|";
+            newChar = "│";
         }
         for (int i = 0 ; i < prefix.length() ; i++){
             if (prefix.charAt(i) != ' ') {
@@ -106,8 +106,12 @@ public class BST<T extends Comparable<T>> {
         else {
             newPrefix = newPrefix + "└";
         }
-        
-        return newPrefix + current.getData() + "\n" + toStringSubTree(current.getLeft(), true, newPrefix) + toStringSubTree(current.getRight(), false, newPrefix);
+        if (current.getRight() != null) {
+            return newPrefix + current.getData() + "\n" + toStringSubTree(current.getLeft(), true, newPrefix) + toStringSubTree(current.getRight(), false, newPrefix);
+        }
+        else {
+            return newPrefix + current.getData() + "\n" + toStringSubTree(current.getLeft(), false, newPrefix);
+        }
     }
 
     public String toString() {
@@ -124,12 +128,12 @@ public class BST<T extends Comparable<T>> {
         tmp.insert(25);
         System.out.println(tmp);
 
-        System.out.println(tmp.searchR(8).getData().toString());
+        System.out.println(tmp.searchR(8).getData().toString() + "\n");
 
         tmp.insertR(100);
         tmp.insertR(4);
         tmp.insertR(15);
-        tmp.insertR(18);
+        //tmp.insertR(18);
         tmp.insertR(101);
 
         System.out.println(tmp);
