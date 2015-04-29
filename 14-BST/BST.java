@@ -77,9 +77,25 @@ public class BST<T extends Comparable<T>> {
         insertRH(root, i);
     }
 
-    // We use the tree as specified in the following article:
-    // http://stackoverflow.com/questions/13435323/string-representation-of-binary-search-tree
-    // i.e. we use "<" and ">" to trace out how to get to a certain node.
+    private void removeH(Node current, T i) {
+        if (current.getData().compareTo(i) > 0) {
+            if (current.getLeft().getData().compareTo(i) == 0) {
+                return current;
+            }
+            removeH(current.getLeft(), i);
+        }
+        else {
+            if (current.getRight().getData().compareTo(i) == 0) {
+                return current;
+            }
+            removeH(current.getRight(), i);
+        }
+
+    }
+
+    public void remove(T i) {
+        Node<T> parent 
+    }
 
     private String toStringSubTree(Node current, boolean left, String prefix) {
         if (current == null) {

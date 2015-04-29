@@ -686,4 +686,36 @@ public insert (Node T) {
     }
 }
 \end{lstlisting}
+
+\section{2015-4-29}
+\subsection{Remove in a Tree}
+\begin{lstlisting}
+10
+-5
+|-2
+||-4
+|-8
+-20
+ -17
+ |-15
+ |-18
+ -25
+  -100
+   -101
+\end{lstlisting}
+There are three situations when we try to delete a node, each one harder than
+the next. However, we need to use the same piggy-back algorithm as used in
+insertion.
+\subsubsection{Leaf}
+It is very easy to remove a leaf, we simply set the parent's left/right to null.
+
+\subsubsection{1 Child}
+This is a little bit more work, but still not that much. We basically take out
+the node as if it's a linked list. i.e.
+parent.setRight(parent.getRight().getRight()).
+
+\subsubsection{2 Children}
+For example, if we want to remove the node 20 from our tree, we need to find the
+largest node on the left side of the tree, which is 18, and remove it and add it
+in place of the twenty. This preserves our tree structure.
 \end{document}
