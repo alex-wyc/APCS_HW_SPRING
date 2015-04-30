@@ -196,6 +196,20 @@ public class BST<T extends Comparable<T>> {
         return root.getData() + "\n" + toStringSubTree(root.getLeft(), true, "") + toStringSubTree(root.getRight(), false, "");
     }
 
+    private String transverseH(Node<T> current) {
+        if (current == null) {
+            return "";
+        }
+        else {
+            return transverseH(current.getLeft()) + current.getData() + " " + transverseH(current.getRight());
+        }
+    }
+
+    public String transverse() {
+        String s = "";
+        return transverseH(root.getLeft()) + root.getData() + " " + transverseH(root.getRight());
+    }
+
     public static void main(String[] args) {
         BST<Integer> tmp = new BST<Integer>(10);
         tmp.insert(5);
@@ -222,5 +236,6 @@ public class BST<T extends Comparable<T>> {
         System.out.println();
 
         System.out.println(tmp);
+        System.out.println(tmp.transverse());
     }
 }
