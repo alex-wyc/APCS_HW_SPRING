@@ -77,24 +77,86 @@ public class BST<T extends Comparable<T>> {
         insertRH(root, i);
     }
 
-    private void removeH(Node current, T i) {
+    private Node<T> findParent(Node current, T i) {
         if (current.getData().compareTo(i) > 0) {
             if (current.getLeft().getData().compareTo(i) == 0) {
                 return current;
             }
-            removeH(current.getLeft(), i);
+            return findParent(current.getLeft(), i);
         }
         else {
             if (current.getRight().getData().compareTo(i) == 0) {
                 return current;
             }
-            removeH(current.getRight(), i);
+            return findParent(current.getRight(), i);
         }
-
     }
 
-    public void remove(T i) {
-        Node<T> parent 
+    private Node<T> findMax(Node<T> current) {
+        if (current.getRight() == null)
+            return current;
+
+        return findMax(current.getRight());
+    }
+
+    public T findMax() {
+        return findMax(root).getData();
+    }
+
+    public T remove(T i) {
+        Node<T> parent = findParent(root, i);
+        boolean left = false;
+        Node<T> toBeRemoved = parent.getRight();
+        if (parent.getLeft() != null && parent.getLeft().getData() == i) {
+            toBeRemoved = parent.getLeft();
+            left = true;
+        }
+
+        // Case 1: if toBeRemoved is a leaf
+        if (toBeRemoved.getLeft() == null && toBeRemoved.getRight() == null) {
+            if (left) {
+                parent.setLeft(null);
+            }
+            else {
+                parent.setRight(null);
+            }
+        }
+
+        // Case 2: if toBeRemoved has 1 child
+        if (toBeRemoved.getLeft() == null || toBeRemoved.getRight() == null) {
+            if (toBeRemoved.getLeft() == null) {
+                if (left) {
+                    parent.setLeft(toBeRemoved.getRight());
+                }
+                else {
+                    parent.setRight(toBeRemoved.getRight());
+                }
+            }
+            else {
+                if (left) {
+                    parent.setLeft(toBeRemoved.getLeft());
+                }
+                else {
+                    parent.setRight(toBeRemoved.getRight());
+                }
+            }
+        }
+
+        // Case 3: if toBeRemoved has 2 children
+        else {
+            Node<T> newCenter = findMax(toBeRemoved.getLeft());
+            remove(newCenter.getData());
+            newCenter.setLeft(toBeRemoved.getLeft());
+            newCenter.setRight(toBeRemoved.getRight());
+            if (left) {
+                parent.setLeft(newCenter);
+            }
+            else {
+                parent.setRight(newCenter);
+            }
+        }
+
+        return toBeRemoved.getData();
     }
 
     private String toStringSubTree(Node current, boolean left, String prefix) {
@@ -151,6 +213,13 @@ public class BST<T extends Comparable<T>> {
         tmp.insertR(15);
         //tmp.insertR(18);
         tmp.insertR(101);
+
+        System.out.println(tmp);
+
+        System.out.println(tmp.remove(100));
+        System.out.println(tmp.remove(101));
+        System.out.println(tmp.remove(20));
+        System.out.println();
 
         System.out.println(tmp);
     }
