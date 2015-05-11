@@ -223,6 +223,36 @@ public class BST<T extends Comparable<T>> {
         }
     }
 
+    public E findMax() {
+        findMax(root);
+    }
+
+    private E findMax(Node<E> T) {
+        if (T.isLeaf()) {
+            return T.getData();
+        }
+        else {
+            if (T.getData() > findMax(T.getLeft())) {
+                if (T.getData() > findMax(T.getRight())) {
+                    return findMax(T.getRight());
+                }
+                else {
+                    return findMax(T.getRight());
+                }
+            }
+            else {
+                if (findMax(T.getLeft()) > findMax(T.getRight())) {
+                    return findMax(T.getLeft());
+                }
+                else {
+                    return findMax(T.getRight());
+                }
+            }
+        }
+    }
+
+    public int height(Node<E> T)
+
     public static void main(String[] args) {
         BST<Integer> tmp = new BST<Integer>(10);
         tmp.insert(5);
