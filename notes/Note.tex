@@ -755,10 +755,48 @@ Do the following functions:
 \end{enumerate}
 
 \section{2015-05-12}
-\subsubsection{Heap}
+\subsection{Heap}
 A min heap is a binary tree such that all children are greater than their
 parents and is as full as possible left and right. A max heap is the same except
 all childrens are less than their parents.
 
-Note the finding the min is a min-heap is a constant-time operation.
+\subsubsection{findMin}
+Note the finding the min is a min-heap is a constant-time operation. We simply
+take the root value.
+
+\subsubsection{removeMin}
+However, if we remove the min, we have several problems:
+\begin{itemize}
+    \item We have a tree without a root
+    \item We have a heap that doesn't follow the heap property.
+\end{itemize}
+
+To solve this we do the following:
+\begin{enumerate}
+    \item Remove the root
+    \item Replace the root with the lowest rightest value
+    \item Pushdown
+    \begin{itemize}
+        \item swap the parent with the smaller of its children until it reaches
+            the leaf.
+    \end{itemize}
+\end{enumerate}
+    
+\subsubsection{heapSort}
+heapSort can be performed by repeated removing the minimum and using the heap's
+self-balancing property to sort the data.
+
+\subsubsection{insert}
+Instead of push down, we sift up. We attach the new data to the lowest leftest
+node and for each parent we replace it with the smaller of its two children. We
+then move up until we hit the root.
+
+\subsection{Algorithm Efficiency}
+Find min: $O(1)$
+
+Remove min / pushdown: $O(\log{n})$
+
+Heapsort: $O(n\log{n})$
+
+Insert: $O(\log{n})$
 \end{document}
