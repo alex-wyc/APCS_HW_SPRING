@@ -136,7 +136,7 @@ public class BST<T extends Comparable<T>> {
 
         // Case 3: if toBeRemoved has 2 children
         else {
-            Node<T> newCenter = findMax(toBeRemoved.getLeft());
+            Node<T> newCenter = findMaxOld(toBeRemoved.getLeft());
             remove(newCenter.getData());
             newCenter.setLeft(toBeRemoved.getLeft());
             newCenter.setRight(toBeRemoved.getRight());
@@ -208,7 +208,7 @@ public class BST<T extends Comparable<T>> {
         return nodeCountH(root);
     }
 
-    private int nodeCountH(Node<E> T) {
+    private int nodeCountH(Node<T> T) {
         if (T == null) {
             return 0;
         }
@@ -218,17 +218,17 @@ public class BST<T extends Comparable<T>> {
     }
 //}}}
 //{{{ findMax function
-    public E findMax() {
+    public T findMax() {
         findMax(root);
     }
 
-    private E findMax(Node<E> T) {
+    private T findMax(Node<T> T) {
         if (T.isLeaf()) {
             return T.getData();
         }
         else {
-            if (T.getData() > findMax(T.getLeft())) {
-                if (T.getData() > findMax(T.getRight())) {
+            if (T.getData().compareTo(findMax(T.getLeft())) > 0) {
+                if (T.getData().compareTo(findMax(T.getRight())) > 0) {
                     return findMax(T.getRight());
                 }
                 else {
@@ -236,7 +236,7 @@ public class BST<T extends Comparable<T>> {
                 }
             }
             else {
-                if (findMax(T.getLeft()) > findMax(T.getRight())) {
+                if (findMax(T.getLeft()).compareTo(findMax(T.getRight()))) {
                     return findMax(T.getLeft());
                 }
                 else {
@@ -246,33 +246,46 @@ public class BST<T extends Comparable<T>> {
         }
     }
 
-    private Node<T> findMax(Node<T> current) {
+    private Node<T> findMaxOld(Node<T> current) {
         if (current.getRight() == null)
             return current;
 
-        return findMax(current.getRight());
+        return findMaxOld(current.getRight());
     }
 
-    public T findMax() {
-        return findMax(root).getData();
+    public T findMaxOld() {
+        return findMaxOld(root).getData();
     }
+
 //}}}
 //{{{ height function
     public int height() {
         return height(root);
     }
 
-    private int height(Node<E> T) {
-        if (T.isLeaf()) {
-            return 1;
+    private int height(Node<T> T) {
+        if (T == null) {
+            return 0;
         }
         else {
-            if (height(T.getLeft()) > height(T.getRight())) {
-                return 1 + height(T.getLeft());
-            }
-            else {
-                return 1 + height(T.getRight());
-            }
+            return 1 + Math.max(height(T.getLeft()), height(T.getRight()));
+        }
+    }
+//}}}
+//{{{ diameter
+    public int diameter() {
+        diameter(root);
+    }
+
+    public int diameter(Node<T> T) {
+        if (T == null) {
+            return 0;
+        }
+        else {
+            int path1 = height(T.getLeft()) + height(T.getRight()) + 2;
+            int path2 = diameter(T.getLeft());
+            int path3 = diameter(T.getRight());
+            return Math.max(Math.max(path1, path2), path3);
         }
     }
 //}}}
