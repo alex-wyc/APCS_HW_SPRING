@@ -5,6 +5,7 @@ public class BST<T extends Comparable<T>> {
         root = new Node<T>(data);
     }
 
+//{{{ Iterative Insert/Search
     public Node<T> search(T i) {
         Node<T> tmp = root;
         while (tmp != null) {
@@ -16,23 +17,6 @@ public class BST<T extends Comparable<T>> {
             tmp = (c > 0) ? tmp.getRight() : tmp.getLeft();
         }
         return null;
-    }
-
-    private Node<T> searchRH(Node current, T i) {
-        int c = current.getData().compareTo(i);
-        if (c == 0) {
-            return current;
-        }
-
-        if (c > 0) {
-            return searchRH(current.getLeft(), i);
-        }
-
-        return searchRH(current.getRight(), i);
-    }
-
-    public Node<T> searchR(T i) {
-        return searchRH(root, i);
     }
 
     public void insert(T i) {
@@ -54,6 +38,24 @@ public class BST<T extends Comparable<T>> {
         else {
             tmp2.setLeft(newNode);
         }
+    }
+//}}}
+//{{{ Recursive Insert/Search
+    private Node<T> searchRH(Node current, T i) {
+        int c = current.getData().compareTo(i);
+        if (c == 0) {
+            return current;
+        }
+
+        if (c > 0) {
+            return searchRH(current.getLeft(), i);
+        }
+
+        return searchRH(current.getRight(), i);
+    }
+
+    public Node<T> searchR(T i) {
+        return searchRH(root, i);
     }
 
     private void insertRH(Node current, T i) {
@@ -91,18 +93,8 @@ public class BST<T extends Comparable<T>> {
             return findParent(current.getRight(), i);
         }
     }
-
-    private Node<T> findMax(Node<T> current) {
-        if (current.getRight() == null)
-            return current;
-
-        return findMax(current.getRight());
-    }
-
-    public T findMax() {
-        return findMax(root).getData();
-    }
-
+//}}}
+//{{{ Remove
     public T remove(T i) {
         Node<T> parent = findParent(root, i);
         boolean left = false;
@@ -158,7 +150,8 @@ public class BST<T extends Comparable<T>> {
 
         return toBeRemoved.getData();
     }
-
+//}}}
+//{{{ toString and transverse
     private String toStringSubTree(Node current, boolean left, String prefix) {
         if (current == null) {
             return "";
@@ -209,7 +202,8 @@ public class BST<T extends Comparable<T>> {
         String s = "";
         return transverseH(root.getLeft()) + root.getData() + " " + transverseH(root.getRight());
     }
-
+//}}}
+//{{{ nodeCount function
     public int nodeCount() {
         return nodeCountH(root);
     }
@@ -222,7 +216,8 @@ public class BST<T extends Comparable<T>> {
             return 1 + nodeCountH(T.getLeft()) + nodeCountH(T.getRight());
         }
     }
-
+//}}}
+//{{{ findMax function
     public E findMax() {
         findMax(root);
     }
@@ -251,8 +246,37 @@ public class BST<T extends Comparable<T>> {
         }
     }
 
-    public int height(Node<E> T)
+    private Node<T> findMax(Node<T> current) {
+        if (current.getRight() == null)
+            return current;
 
+        return findMax(current.getRight());
+    }
+
+    public T findMax() {
+        return findMax(root).getData();
+    }
+//}}}
+//{{{ height function
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node<E> T) {
+        if (T.isLeaf()) {
+            return 1;
+        }
+        else {
+            if (height(T.getLeft()) > height(T.getRight())) {
+                return 1 + height(T.getLeft());
+            }
+            else {
+                return 1 + height(T.getRight());
+            }
+        }
+    }
+//}}}
+//{{{ main
     public static void main(String[] args) {
         BST<Integer> tmp = new BST<Integer>(10);
         tmp.insert(5);
@@ -281,4 +305,5 @@ public class BST<T extends Comparable<T>> {
         System.out.println(tmp);
         System.out.println(tmp.transverse());
     }
+//}}}
 }
