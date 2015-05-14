@@ -799,4 +799,17 @@ Remove min / pushdown: $O(\log{n})$
 Heapsort: $O(n\log{n})$
 
 Insert: $O(\log{n})$
+
+\section{2015-05-14}
+\subsection{Array-Heap}
+Note that by the nature of binary trees, the two child of the parent node at
+index $n$ is $2n$ and $2n+1$. To change any array and convert it into a heap, we
+start at the last element of the array, push down, from there. This creates a
+mini-heap with root being the last element. Then we move to the top one element
+at a time, expanding the ``heap'' portion of the array. Eventually creating the
+heap.
+
+To do the heapsort, instead of pulling out the root, we swap the root with the
+last element of the array. Then we basically shrink the ``heap'' part of the
+array.
 \end{document}
