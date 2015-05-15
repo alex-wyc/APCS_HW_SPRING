@@ -43,7 +43,13 @@ public class Heap {
         heap[0] = tmp;
         effectiveLength--;
         pushDown(0);
+        return heap[effectiveLength];
     }
 
-    public void heapSort
+    public int[] heapSort() {
+        while (effectiveLength > 0) {
+            removeMin();
+        }
+        return heap;
+    }
 }
