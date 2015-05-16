@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Heap {
     int[] heap;
     int effectiveLength;
@@ -10,37 +12,37 @@ public class Heap {
 
     public Heap(int size) {
         heap = new int[size];
-        effectiveLength = size;
+        effectiveLength = 0;
     }
 
-    public boolean treeEnd(int index) {
+    private boolean treeEnd(int index) {
         return 2 * index > effectiveLength;
     }
 
-    public void pushDown(int index) {
-        if (treeEnd(index)) {
+    private void pushDown(int index) {
+        int length = index + 1;
+        if (2 * length >= effectiveLength) {
             return;
         }
 
-        if (heap[2 * index] < heap[index]) {
-            int tmp = heap[2 * index];
-            heap[2 * index] = heap[index];
+        while (heap[2 * length - 1] < heap[index]) {
+            int tmp = heap[2 * length - 1];
+            heap[2 * length - 1] = heap[index];
             heap[index] = tmp;
-        }
-        else if (heap[2 * index + 1] < heap[index]) {
-            int tmp = heap[2 * index + 1];
-            heap[2 * index + 1] = heap[index];
-            heap[index] = tmp;
+            pushDown(2 * length - 1);
         }
 
-        pushDown(2 * index);
-        pushDown(2 * index + 1);
+        while (heap[2 * length] < heap[index]) {
+            int tmp = heap[2 * length];
+            heap[2 * length] = heap[index];
+            heap[index] = tmp;
+            pushDown(2 * length);
+        }
     }
 
     public int removeMin() {
-        int tmp = heap[effectiveLength - 1];
-        heap[effectiveLength - 1] = heap[0];
-        heap[0] = tmp;
+        heap[0] = heap[effectiveLength - 1];
+        heap[effectiveLength - 1] = 0;
         effectiveLength--;
         pushDown(0);
         return heap[effectiveLength];
@@ -48,8 +50,49 @@ public class Heap {
 
     public int[] heapSort() {
         while (effectiveLength > 0) {
-            removeMin();
+            int tmp = heap[effectiveLength - 1];
+            heap[effectiveLength - 1] = heap[0];
+            heap[0] = tmp;
+            effectiveLength--;
+            pushDown(0);
         }
         return heap;
+    }
+
+    public int getSize() {
+        return effectiveLength;
+    }
+
+    public boolean insert(int newVal) {
+        if (effectiveLength == heap.length) {
+            return false;
+        }
+        heap[effectiveLength] = newVal;
+        siftUp(effectiveLength);
+        effectiveLength++;
+        return true;
+    }
+
+    private void siftUp(int index) {
+        if (index == 0) {
+            return;
+        }
+        int parentIndex = (index + 1) / 2 - 1;
+        if (heap[index] < heap[parentIndex]) {
+            int tmp = heap[parentIndex];
+            heap[parentIndex] = heap[index];
+            heap[index] = tmp;
+            siftUp(parentIndex);
+        }
+        return;
+    }
+
+    public String toString() {
+        String retVal = "[";
+        for (int i = 0 ; i < effectiveLength ; i++) {
+            retVal = retVal + heap[i] + ", ";
+        }
+        retVal = retVal.substring(0, retVal.length() - 2) + "]";
+        return retVal;
     }
 }
