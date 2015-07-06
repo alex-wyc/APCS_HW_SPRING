@@ -812,4 +812,19 @@ heap.
 To do the heapsort, instead of pulling out the root, we swap the root with the
 last element of the array. Then we basically shrink the ``heap'' part of the
 array.
+
+\section{2015-05-26}
+In a weighted graph, breath first search doesn't quite work. Because it assumed
+that every step is 1. A-Star doesn't take consideration of the edge length
+either.
+
+\subsection{Dijkstra's Path Finding Algorithm}
+Single Source Shortest Path Algorithm -- Gives the shortest path from one node.
+
+We start building a solution set, begin the algorithm from the beginning node:
+\begin{enumerate}
+    \item initialize all unreached points to infinity
+    \item Add new node with the lowest edge length to the solution set.
+    \item For each node not in the solution set, recalculate the minimum.
+\end{enumerate}
 \end{document}
