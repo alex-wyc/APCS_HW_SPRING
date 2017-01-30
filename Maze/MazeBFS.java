@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Maze {
+public class MazeBFS {
     private char[][] board;
     private int myX;
     private int myY;
@@ -19,7 +19,7 @@ public class Maze {
 
     private myQueue<Position> frontier = new myQueue<Position>();
 
-    public Maze(String filename, int newMaxX, int newMaxY) {
+    public MazeBFS(String filename, int newMaxX, int newMaxY) {
         maxX = newMaxX;
         maxY = newMaxY;
         board = new char[maxX][maxY];
@@ -121,7 +121,7 @@ public class Maze {
     }
 
     public static void main(String[] args) {
-        Maze maze1 = new Maze(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+        MazeBFS maze1 = new MazeBFS(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));
         System.out.println(maze1);
         maze1.solve();
     }
